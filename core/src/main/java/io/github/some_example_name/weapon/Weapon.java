@@ -25,6 +25,6 @@ public abstract class Weapon {
         timer = 0f;
     }
 
-    public abstract void fire(Vector2 origin, Vector2 target, BulletSpawner spawner);
+    public abstract void fire(Vector2 origin, Vector2 direction, BulletSpawner spawner);
 }
 
