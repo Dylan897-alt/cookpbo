@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package io.github.some_example_name.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -7,23 +7,27 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import io.github.some_example_name.character.Crosshair;
+import io.github.some_example_name.PlayerController;
+import io.github.some_example_name.ShooterGame;
+import io.github.some_example_name.object.Crosshair;
 import io.github.some_example_name.character.Enemy;
 import io.github.some_example_name.character.Player;
+import io.github.some_example_name.object.BulletManager;
 
-public class GameScreen implements Screen {
+public class Stage1 implements Screen {
     public static final float PPU = 48f;
     final ShooterGame game;
     Player player;
     Enemy dog1;
     Crosshair crosshair;
     PlayerController playerController;
+    BulletManager bulletManager;
     OrthographicCamera camera;
     FitViewport viewport;
     SpriteBatch batch;
 
 
-    public GameScreen(final ShooterGame game) {
+    public Stage1(final ShooterGame game) {
         this.game = game;
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
@@ -36,6 +40,7 @@ public class GameScreen implements Screen {
         this.dog1 = new Enemy(new Texture("Canine_Black_Attack.png"), 48, 32, 0.1f);
 
         this.crosshair = new Crosshair(new Texture("crosshair.png"), viewport, player);
+        this.bulletManager = new BulletManager();
     }
 
     @Override
@@ -49,9 +54,13 @@ public class GameScreen implements Screen {
         player.update(delta);
         dog1.update(delta);
         crosshair.update(delta);
+        bulletManager.updateBullets(delta);
+
+        //nanti ganti di bullet manager
         for (int i = 0; i < player.getBullets().size(); i++) {
             player.getBullets().get(i).update(delta);
         }
+
         draw();
     }
 
@@ -66,6 +75,9 @@ public class GameScreen implements Screen {
         player.draw(batch);
         dog1.draw(batch);
         crosshair.draw(batch);
+        bulletManager.drawAll(batch);
+
+        //nanti ganti di bullet manager
         for (int i = 0; i < player.getBullets().size(); i++) {
             player.getBullets().get(i).draw(batch);
         }
@@ -90,5 +102,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+        //tambahin Ward
     }
 }

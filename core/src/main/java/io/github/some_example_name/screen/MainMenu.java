@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package io.github.some_example_name.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -6,12 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import io.github.some_example_name.ShooterGame;
 
-import java.awt.*;
-
-public class MainMenuScreen implements Screen{
+public class MainMenu implements Screen{
     public static final float PPU = 48f; // e.g., 48 pixels = 1 world unit
     final ShooterGame game;
     BitmapFont font;
@@ -30,7 +28,7 @@ public class MainMenuScreen implements Screen{
 
 
 
-    public MainMenuScreen(final ShooterGame game){
+    public MainMenu(final ShooterGame game){
         this.game = game;
         this.batch = new SpriteBatch();
         this.font = new BitmapFont();

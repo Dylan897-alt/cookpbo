@@ -2,15 +2,17 @@ package io.github.some_example_name.character;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-
-import java.sql.Array;
+import io.github.some_example_name.object.Bullet;
+import io.github.some_example_name.object.BulletOwner;
+import io.github.some_example_name.weapon.Weapon;
 import java.util.ArrayList;
 
 public class Player extends Character {
     private Vector2 velocity;
     private boolean isTravelling;
     private boolean facingRight;
-    ArrayList<Bullet> bullets = new ArrayList<>();
+    private Weapon weapon;
+    ArrayList<Bullet> bullets = new ArrayList<>(); //hapus, ganti di bullet manager
 
     public Player(Texture texture) {
         super(new Sprite(texture));
@@ -60,10 +62,12 @@ public class Player extends Character {
         velocity.setZero();
     }
 
+    //ganti di bullet manager
     public void addBullet(Vector2 startPos, Vector2 direction){
-        bullets.add(new Bullet(new Texture("2.png"), startPos, direction));
+        bullets.add(new Bullet(new Texture("2.png"), startPos, direction, BulletOwner.PLAYER));
     }
 
+    //ga perlu
     public ArrayList<Bullet> getBullets(){
         return bullets;
     }

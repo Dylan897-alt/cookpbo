@@ -38,6 +38,7 @@ public class PlayerController {
         player.move(moveDelta);
         player.faceDirection(moveDelta.x);
 
+        //pindah logic nembak ke Weapon nanti
         timeSinceLastShot += delta;
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && timeSinceLastShot >= fireCooldown) {
             Vector2 touchPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
@@ -49,6 +50,5 @@ public class PlayerController {
             player.addBullet(startPos, direction);
             timeSinceLastShot = 0f;
         }
-        //pindah logic nembak ke Weapon
     }
 }

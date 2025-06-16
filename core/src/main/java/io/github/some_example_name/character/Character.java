@@ -2,10 +2,28 @@ package io.github.some_example_name.character;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
+import io.github.some_example_name.Collidable;
+import io.github.some_example_name.Damageable;
 
-public abstract class Character {
+public abstract class Character implements Collidable, Damageable {
     protected Sprite sprite;
     private float hp;
+    private float exp;
+
+    @Override
+    public Rectangle getHitbox(){
+        return new Rectangle(
+            sprite.getX(),
+            sprite.getY(),
+            sprite.getWidth(),
+            sprite.getHeight()
+        );
+    }
+    @Override
+    public void takeDamage(float damage){
+
+    }
 
     public Character(Sprite sprite) {
         this.sprite = sprite;

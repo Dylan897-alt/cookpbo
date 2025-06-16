@@ -5,4 +5,7 @@ public class GlobalVariables {
     public static float cooldownReduction;
     public static float speedBonus;
     public static float bulletSpeedBonus;
+    public static float bulletSpeed;
+    public static float singleShotCooldown;
+    public static float tripleShotCooldown;
 }
