@@ -8,10 +8,8 @@ public abstract class Weapon {
     //Weapon cuma control berapa bullet yang di spawn, angle nya, dan kapan nembak
     protected float cooldown;
     protected float timer = 0f;
-    protected Texture bulletTexture;
 
-    public Weapon(Texture bulletTexture, float cooldown) {
-        this.bulletTexture = bulletTexture;
+    public Weapon(float cooldown) {
         this.cooldown = cooldown;
     }
 

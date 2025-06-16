@@ -12,9 +12,9 @@ public class Bullet extends Character implements Collidable { //pindah ke packag
     private float speed; //ga perlu
 
     public Bullet(Texture texture, Vector2 startPos, Vector2 direction, BulletOwner owner){
-        super(new Sprite(texture));
+        super(new Sprite(texture), 10, 2);
         this.owner = owner;
-        this.speed = 3f; //ganti static global variable
+        this.speed = 7f; //ganti static global variable
         this.startPos = new Vector2(startPos);
         this.velocity = new Vector2(direction).set(direction.nor().scl(speed));
         sprite.setSize(sprite.getWidth()/10f, sprite.getHeight()/10f);

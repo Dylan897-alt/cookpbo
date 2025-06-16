@@ -15,7 +15,7 @@ public class Crosshair extends Character { //pindah ke package object, terus gan
     private final Vector2 mousePos;
 
     public Crosshair(Texture texture, FitViewport viewport, Player player){
-        super(new Sprite(texture));
+        super(new Sprite(texture), 10, 2);
         sprite.setSize(sprite.getWidth()/200f, sprite.getHeight()/200f);
         this.viewport = viewport;
         this.player = player;

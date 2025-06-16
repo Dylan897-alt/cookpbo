@@ -14,8 +14,8 @@ public class Player extends Character {
     private Weapon weapon;
     ArrayList<Bullet> bullets = new ArrayList<>(); //hapus, ganti di bullet manager
 
-    public Player(Texture texture) {
-        super(new Sprite(texture));
+    public Player(float hp, float exp, Texture texture) {
+        super(new Sprite(texture), hp, exp);
         sprite.setSize(1f, 1f);
         this.velocity = new Vector2();
         this.isTravelling = false;

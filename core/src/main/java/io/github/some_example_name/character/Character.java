@@ -25,8 +25,10 @@ public abstract class Character implements Collidable, Damageable {
 
     }
 
-    public Character(Sprite sprite) {
+    public Character(Sprite sprite, float hp, float exp) {
         this.sprite = sprite;
+        this.hp = hp;
+        this.exp = exp;
     }
 
     public void draw(SpriteBatch batch) {
