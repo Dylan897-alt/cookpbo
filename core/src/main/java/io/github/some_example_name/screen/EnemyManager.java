@@ -24,7 +24,10 @@ public class EnemyManager {
     }
 
     public void handleSpawnStage1(float delta){
-
+        //koordinat buat random
+        //float xPosition = random.nextFloat(0, 5); //sesuaiin sama koordinat viewport
+        //float yPosition = random.
+        //Vector2 startPos = new Vector2(xPosition, yPosition);
     }
 
     public void handleSpawnStage2(float delta){

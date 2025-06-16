@@ -1,0 +1,6 @@
+Kerja di package screen:
+- Buat screen MainMenu, GameOver, dll
+- Kerja logika spawning di EnemyManager
+- Kerja logika hapus musuh klo musuh mati (koordinasi sama aku nanti)
+- Klo mau liat koordinat viewport ada di ShooterGame (VIRTUAL_WIDTH = x, VIRTUAL_HEIGHT = y)
+- Klo mau pakai GlobalVariables di package utils

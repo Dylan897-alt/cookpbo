@@ -7,5 +7,5 @@ public class GlobalVariables {
     public static float bulletSpeedBonus;
     public static float bulletSpeed;
     public static float singleShotCooldown;
-    public static float tripleShotCooldown;
+    public static float tripleShotCooldown = 3.2f;
 }

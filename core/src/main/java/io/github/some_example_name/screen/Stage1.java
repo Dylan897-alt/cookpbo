@@ -92,7 +92,8 @@ public class Stage1 implements Screen {
     }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
     public void resume() {}

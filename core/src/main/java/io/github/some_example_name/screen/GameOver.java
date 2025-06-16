@@ -2,7 +2,5 @@
 //
 //import com.badlogic.gdx.Screen;
 //
-//public class Stage2 implements Screen {
-//    @Override
-//    public
+//public class GameOver extends Screen {
 //}

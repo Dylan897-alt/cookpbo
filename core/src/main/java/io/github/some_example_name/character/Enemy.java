@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import io.github.some_example_name.object.Bullet;
+import io.github.some_example_name.object.BulletManager;
 import io.github.some_example_name.screen.Stage1;
 import io.github.some_example_name.weapon.Weapon;
 import org.w3c.dom.Text;
@@ -39,7 +41,22 @@ public class Enemy extends Character {
         sprite.translateX(-2f * delta); // ganti pakai static global variable
     }
 
+    public void updateWeapon(float delta, BulletManager spawner){
+        weapon.update(delta);
+        if(weapon.canFire()){
+//            Vector2 origin =
+//            Vector2 direction =
+            //weapon.fire(bulletTexture, origin, direction, spawner);
+        }
+    }
+
     public void setWeapon(Weapon weapon){
         this.weapon = weapon;
     }
+
+    public void fireWeapon(){
+        //hitung vector posisi sekarang, dan vector tujuan
+        //weapon.fire(bulletTexture, origin, direction, dll)
+    }
+
 }

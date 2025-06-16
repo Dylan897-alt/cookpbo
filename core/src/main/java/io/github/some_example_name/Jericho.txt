@@ -1,0 +1,14 @@
+Kerja di package weapon:
+- Kerja single shot, triple shot, spam shot aja
+- Extend semua anak anak e ke Weapon sama override method fire() sesuai shotnya (bikin bulletnya pakai parameter BulletSpawner)
+
+Kerja di package character bagian Enemy (koordinasi sama aku nanti):
+- Kerja method updateWeapon()
+- Koordinatnya pakai koordinat viewport
+- Nanti aku mungkin bikin beberapa jenis enemy yang nge extend Enemy (km Override method updateWeapon() di anak- anaknya)
+
+Kerja di package object (lek km cepet km kerja o ini, tapi kemungkinan besar tak kerjain dulu. Klo wes tak kerjain km gk usah):
+- Selesaiin class GameObject
+- Ganti Bullet dan Crosshair jadi extend GameObject
+
+Harus ngerti logika Bullet, BulletManager (BulletManager = BulletSpawner karena implement interface itu), Enemy
