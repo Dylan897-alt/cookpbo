@@ -8,6 +8,7 @@ import io.github.some_example_name.character.Player;
 import io.github.some_example_name.object.Bullet;
 import io.github.some_example_name.object.BulletManager;
 import io.github.some_example_name.weapon.SingleShotWeapon;
+import io.github.some_example_name.weapon.TripleShotWeapon;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,9 +22,9 @@ public class EnemyManager {
 
     public EnemyManager(){
         templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SingleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SingleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-        templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SingleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-        templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SingleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new TripleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+        templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new TripleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+        templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new TripleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
         templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SingleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
     }
 
