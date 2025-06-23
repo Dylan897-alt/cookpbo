@@ -29,6 +29,7 @@ public class EnemyManager {
 
     public void handleSpawnStage1(float delta){
         cooldown -= delta;
+        //koordinatnya benerin ward
         if (cooldown <= 0) {
             cooldown = 1f + random.nextFloat() * 2f;
             float xPosition = random.nextFloat() * 8;
