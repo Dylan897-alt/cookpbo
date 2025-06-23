@@ -7,8 +7,7 @@ import io.github.some_example_name.character.Enemy;
 import io.github.some_example_name.character.Player;
 import io.github.some_example_name.object.Bullet;
 import io.github.some_example_name.object.BulletManager;
-import io.github.some_example_name.weapon.SingleShotWeapon;
-import io.github.some_example_name.weapon.TripleShotWeapon;
+import io.github.some_example_name.weapon.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,11 +20,11 @@ public class EnemyManager {
     private float cooldown = 1f;
 
     public EnemyManager(){
-        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, new SingleShotWeapon(1.2f), new Texture("stage1_single_shot.png"), new Texture("2.png")));
-        templateStage1.add(new EnemyTemplate(734, 672, .2f, 10, 2, new TripleShotWeapon(1.2f), new Texture("stage1_melee.png"), new Texture("2.png")));
-        templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new TripleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-        templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new TripleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-        templateStage2.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SingleShotWeapon(1.2f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, new SingleShotWeapon(1.2f), new Texture("stage1_single_shot.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(734, 672, .2f, 10, 2, new TripleShotWeapon(2.0f), new Texture("stage1_melee.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SpamShotWeapon(4.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new FiveShotWeapon(3.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new BomberWeapon(2.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
     }
 
     public void handleSpawnStage1(float delta){
