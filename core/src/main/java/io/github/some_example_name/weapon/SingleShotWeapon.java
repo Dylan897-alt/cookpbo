@@ -10,8 +10,9 @@ public class SingleShotWeapon extends Weapon{
         super(cooldown);
     }
 
-    public void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner){
-        spawner.spawnBullet(bulletTexture, origin, direction, BulletOwner.ENEMY);
+    @Override
+    public void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner, BulletOwner owner){
+        spawner.spawnBullet(bulletTexture, origin, direction, owner);
         resetCooldown();
     }
 }

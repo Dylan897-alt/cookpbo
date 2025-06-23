@@ -26,6 +26,6 @@ public abstract class Weapon {
         timer = 0f;
     }
 
-    public abstract void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner);
+    public abstract void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner, BulletOwner owner);
 }
 

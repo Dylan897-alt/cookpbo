@@ -18,17 +18,17 @@ public class TripleShotWeapon extends Weapon {
     }
 
     @Override
-    public void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner) {
+    public void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner, BulletOwner owner) {
         Vector2 baseDirection = new Vector2(direction).nor();
-        spawner.spawnBullet(bulletTexture, origin.cpy(), baseDirection.cpy(), BulletOwner.ENEMY);
+        spawner.spawnBullet(bulletTexture, origin.cpy(), baseDirection.cpy(), owner);
 
         // Peluru kiri
         Vector2 leftDirection = baseDirection.cpy().rotateDeg(spreadAngleDegrees*2);
-        spawner.spawnBullet(bulletTexture, origin.cpy(), leftDirection, BulletOwner.ENEMY);
+        spawner.spawnBullet(bulletTexture, origin.cpy(), leftDirection, owner);
 
         // Peluru kanan
         Vector2 rightDirection = baseDirection.cpy().rotateDeg(-spreadAngleDegrees * 2); // Total deviasi kanan
-        spawner.spawnBullet(bulletTexture, origin.cpy(), rightDirection, BulletOwner.ENEMY);
+        spawner.spawnBullet(bulletTexture, origin.cpy(), rightDirection, owner);
 
         resetCooldown();
     }

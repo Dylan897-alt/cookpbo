@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import io.github.some_example_name.object.BulletManager;
+import io.github.some_example_name.object.BulletOwner;
 import io.github.some_example_name.screen.Stage1;
 import io.github.some_example_name.weapon.Weapon;
 
@@ -46,7 +47,7 @@ public class Enemy extends Character {
         if(weapon.canFire()){
             Vector2 origin = getCenter();
             Vector2 direction = new Vector2(player.getCenter()).sub(origin);
-            weapon.fire(bulletTexture, origin, direction, spawner);
+            weapon.fire(bulletTexture, origin, direction, spawner, BulletOwner.ENEMY);
         }
     }
 
