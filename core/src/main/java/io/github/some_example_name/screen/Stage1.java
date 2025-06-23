@@ -23,6 +23,7 @@ public class Stage1 implements Screen {
     Crosshair crosshair;
     PlayerController playerController;
     BulletManager bulletManager;
+    EnemyManager enemyManager;
     OrthographicCamera camera;
     FitViewport viewport;
     SpriteBatch batch;
@@ -42,6 +43,7 @@ public class Stage1 implements Screen {
 
         this.crosshair = new Crosshair(new Texture("crosshair.png"), viewport, player);
         this.bulletManager = new BulletManager();
+        this.enemyManager = new EnemyManager();
     }
 
     @Override
@@ -53,9 +55,10 @@ public class Stage1 implements Screen {
     public void render(float delta) {
         playerController.handleInput(delta);
         player.update(delta);
-        //dog1.update(delta);
         crosshair.update(delta);
         bulletManager.updateBullets(delta);
+        enemyManager.handleSpawnStage1(delta);
+        enemyManager.updateEnemies(delta, bulletManager, player);
 
         //nanti ganti di bullet manager
         for (int i = 0; i < player.getBullets().size(); i++) {
@@ -74,9 +77,9 @@ public class Stage1 implements Screen {
 
         batch.begin();
         player.draw(batch);
-        //dog1.draw(batch);
         crosshair.draw(batch);
         bulletManager.drawAll(batch);
+        enemyManager.drawAll(batch);
 
         //nanti ganti di bullet manager
         for (int i = 0; i < player.getBullets().size(); i++) {

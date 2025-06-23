@@ -7,8 +7,4 @@ Kerja di package character bagian Enemy (koordinasi sama aku nanti):
 - Koordinatnya pakai koordinat viewport
 - Nanti aku mungkin bikin beberapa jenis enemy yang nge extend Enemy (km Override method updateWeapon() di anak- anaknya)
 
-Kerja di package object (lek km cepet km kerja o ini, tapi kemungkinan besar tak kerjain dulu. Klo wes tak kerjain km gk usah):
-- Selesaiin class GameObject
-- Ganti Bullet dan Crosshair jadi extend GameObject
-
 Harus ngerti logika Bullet, BulletManager (BulletManager = BulletSpawner karena implement interface itu), Enemy

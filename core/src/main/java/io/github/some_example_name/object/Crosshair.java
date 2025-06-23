@@ -8,14 +8,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.some_example_name.character.Character;
 import io.github.some_example_name.character.Player;
 
-public class Crosshair extends Character { //pindah ke package object, terus ganti extend GameObject
+public class Crosshair extends GameObject { //pindah ke package object, terus ganti extend GameObject
     private final FitViewport viewport;
     private final Player player;
     private final Vector2 touchPos;
     private final Vector2 mousePos;
 
     public Crosshair(Texture texture, FitViewport viewport, Player player){
-        super(new Sprite(texture), 10, 2);
+        super(new Sprite(texture));
         sprite.setSize(sprite.getWidth()/200f, sprite.getHeight()/200f);
         this.viewport = viewport;
         this.player = player;

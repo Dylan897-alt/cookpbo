@@ -38,13 +38,6 @@ public class Player extends Character {
         this.isTravelling = true;
     }
 
-    public Vector2 getCenter() {
-        return new Vector2(
-            sprite.getX() + sprite.getWidth() / 2f,
-            sprite.getY() + sprite.getHeight() / 2f
-        );
-    }
-
     @Override
     public void update(float delta){
         if (isTravelling) {

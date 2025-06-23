@@ -5,14 +5,14 @@ import com.badlogic.gdx.math.Vector2;
 import io.github.some_example_name.Collidable;
 import io.github.some_example_name.character.Character;
 
-public class Bullet extends Character implements Collidable { //pindah ke package object, terus ganti extend GameObject
+public class Bullet extends GameObject implements Collidable { //pindah ke package object, terus ganti extend GameObject
     private Vector2 startPos;
     private Vector2 velocity;
     private BulletOwner owner;
     private float speed; //ga perlu
 
     public Bullet(Texture texture, Vector2 startPos, Vector2 direction, BulletOwner owner){
-        super(new Sprite(texture), 10, 2);
+        super(new Sprite(texture));
         this.owner = owner;
         this.speed = 7f; //ganti static global variable
         this.startPos = new Vector2(startPos);

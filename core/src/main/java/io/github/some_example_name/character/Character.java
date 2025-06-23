@@ -3,6 +3,7 @@ package io.github.some_example_name.character;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import io.github.some_example_name.Collidable;
 import io.github.some_example_name.Damageable;
 
@@ -33,6 +34,13 @@ public abstract class Character implements Collidable, Damageable {
 
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
+    }
+
+    public Vector2 getCenter() {
+        return new Vector2(
+            sprite.getX() + sprite.getWidth() / 2f,
+            sprite.getY() + sprite.getHeight() / 2f
+        );
     }
 
     public float getX() {
