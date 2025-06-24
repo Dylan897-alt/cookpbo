@@ -20,10 +20,10 @@ public class EnemyManager {
     private float cooldown = 1f;
 
     public EnemyManager(){
-//        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, new SingleShotWeapon(1.2f), new Texture("stage1_single_shot.png"), new Texture("2.png")));
+        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, new SingleShotWeapon(1.2f), new Texture("stage1_single_shot.png"), new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(734, 672, .2f, 10, 2, new TripleShotWeapon(2.0f), new Texture("stage1_melee.png"), new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SpamShotWeapon(4.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new FiveShotWeapon(3.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new FiveShotWeapon(3.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new BomberWeapon(2.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
     }
 
