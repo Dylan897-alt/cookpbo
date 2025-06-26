@@ -23,7 +23,7 @@ public abstract class Character implements Collidable, Damageable {
     }
     @Override
     public void takeDamage(float damage){
-
+        hp-=damage; //!!!!!!!!tolong check
     }
 
     public Character(Sprite sprite, float hp, float exp) {
@@ -56,6 +56,12 @@ public abstract class Character implements Collidable, Damageable {
         sprite.setCenter(x, y);
     }
 
+    public float getHp() {
+        return hp;
+    }
+
     public abstract void update(float delta);
+
+
 }
 

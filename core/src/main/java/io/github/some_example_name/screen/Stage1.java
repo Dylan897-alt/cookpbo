@@ -19,6 +19,7 @@ import io.github.some_example_name.object.BulletManager;
 public class Stage1 implements Screen {
     public static final float PPU = 48f;
     final ShooterGame game;
+    private boolean isGameOver = false; //untuk ngecek dia gameover/ga
 
     Player player;
     Crosshair crosshair;
@@ -31,7 +32,7 @@ public class Stage1 implements Screen {
     FitViewport viewport;
     SpriteBatch batch;
 
-    Texture background; // ✅ Background
+    Texture background; // Background
 
     public Stage1(final ShooterGame game) {
         this.game = game;
@@ -40,7 +41,7 @@ public class Stage1 implements Screen {
         camera.setToOrtho(false);
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
-        this.background = new Texture("backgroundstage1.png"); // ✅ Load background
+        this.background = new Texture("backgroundstage1.png"); // Load background
         this.player = new Player(10, 0, new Texture("mc_right.png"), new Texture("2.png"));
         this.playerController = new PlayerController(player, viewport);
 
@@ -57,6 +58,11 @@ public class Stage1 implements Screen {
 
     @Override
     public void render(float delta) {
+        if (isGameOver) {
+            // Jika game-over, pindah ke layar GameOver
+            game.setScreen(new GameOver(game));
+            return;
+        }
         playerController.handleInput(delta, bulletManager);
         player.update(delta);
         crosshair.update(delta);
@@ -64,6 +70,12 @@ public class Stage1 implements Screen {
         enemyManager.handleSpawnStage1(delta);
         enemyManager.updateEnemies(delta, bulletManager, player);
         collisionManager.handleAllCollisions(player, bulletManager, enemyManager);
+
+        // Pengecekan Game-Over berdasarkan kondisi kesehatan pemain
+        if (player.getHp() <= 0) {
+            isGameOver = true;  // Menandakan bahwa permainan selesai
+        }
+
         draw();
     }
 
@@ -75,7 +87,7 @@ public class Stage1 implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT); // ✅ Draw background
+        batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT); // Draw background
 
         player.draw(batch);
         crosshair.draw(batch);
@@ -98,6 +110,6 @@ public class Stage1 implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        background.dispose(); // ✅ Dispose background
+        background.dispose(); // Dispose background
     }
 }

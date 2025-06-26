@@ -50,6 +50,11 @@ public class Player extends Character {
         this.weapon = new SingleShotWeapon(.8f);
     }
 
+    @Override
+    public float getHp() {
+        return super.getHp();
+    }
+
     public void setWeapon(Weapon weapon){
         this.weapon = weapon;
     }
@@ -91,5 +96,10 @@ public class Player extends Character {
 
     public Texture getBulletTexture(){
         return bulletTexture;
+    }
+
+    @Override
+    public void takeDamage(float damage) {
+        super.takeDamage(damage);  // Memanggil metode takeDamage dari kelas induk
     }
 }
