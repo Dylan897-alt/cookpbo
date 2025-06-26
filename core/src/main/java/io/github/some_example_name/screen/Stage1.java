@@ -41,7 +41,7 @@ public class Stage1 implements Screen {
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
         this.background = new Texture("background_stage1.png"); // ✅ Load background
-        this.player = new Player(10, 0, new Texture("mc_right.png"));
+        this.player = new Player(10, 0, new Texture("mc_right.png"), new Texture("2.png"));
         this.playerController = new PlayerController(player, viewport);
 
         this.crosshair = new Crosshair(new Texture("crosshair.png"), viewport, player);
@@ -57,18 +57,13 @@ public class Stage1 implements Screen {
 
     @Override
     public void render(float delta) {
-        playerController.handleInput(delta);
+        playerController.handleInput(delta, bulletManager);
         player.update(delta);
         crosshair.update(delta);
         bulletManager.updateBullets(delta);
         enemyManager.handleSpawnStage1(delta);
         enemyManager.updateEnemies(delta, bulletManager, player);
         collisionManager.handleAllCollisions(player, bulletManager, enemyManager);
-
-        for (int i = 0; i < player.getBullets().size(); i++) {
-            player.getBullets().get(i).update(delta);
-        }
-
         draw();
     }
 
@@ -87,9 +82,6 @@ public class Stage1 implements Screen {
         bulletManager.drawAll(batch);
         enemyManager.drawAll(batch);
 
-        for (int i = 0; i < player.getBullets().size(); i++) {
-            player.getBullets().get(i).draw(batch);
-        }
         batch.end();
     }
 

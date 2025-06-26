@@ -5,12 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.some_example_name.character.Player;
+import io.github.some_example_name.object.BulletManager;
+import io.github.some_example_name.object.BulletOwner;
+import io.github.some_example_name.object.BulletSpawner;
 
 
 public class PlayerController {
     private final Player player;
-    private float fireCooldown = .8f;
-    private float timeSinceLastShot = 0f;
     private final FitViewport viewport;
 
 
@@ -19,7 +20,7 @@ public class PlayerController {
         this.viewport = viewport;
     }
 
-    public void handleInput(float delta) {
+    public void handleInput(float delta, BulletSpawner spawner) {
         Vector2 moveDelta = new Vector2();
         float speed = 2f;
 
@@ -52,17 +53,17 @@ public class PlayerController {
             player.resetAnimation();
         }
 
-        //pindah logic nembak ke Weapon nanti
-        timeSinceLastShot += delta;
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && timeSinceLastShot >= fireCooldown) {
-            Vector2 touchPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            viewport.unproject(touchPos);
 
-            Vector2 startPos = player.getCenter();
-            Vector2 direction = new Vector2(touchPos).sub(startPos);
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            if(player.getWeapon().canFire()){
+                Vector2 origin = player.getCenter();
 
-            player.addBullet(startPos, direction);
-            timeSinceLastShot = 0f;
+                Vector2 touchPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+                viewport.unproject(touchPos);
+                Vector2 direction = new Vector2(touchPos).sub(origin);
+
+                player.getWeapon().fire(player.getBulletTexture(), origin, direction, spawner, BulletOwner.PLAYER);
+            }
         }
     }
 }
