@@ -23,22 +23,18 @@ public class EnemyManager {
 
 
     public EnemyManager(){
-<<<<<<< HEAD
 
-        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, 1, new Texture("stage1_single_shot.png"), new Texture("2.png")));
-//        templateStage1.add(new EnemyTemplate(734, 672, .2f, 10, 2, 2, new Texture("stage1_melee.png"), new Texture("2.png")));
-        templateStage1.add(new EnemyTemplate(436, 333, .1f, 10, 2, 3, new Texture("stage2_triple_shot.png"), new Texture("2.png")));
-//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2,4, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-
-=======
-//        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, 1, new Texture("stage1_single_shot.png"), new Texture("2.png")));
         templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("3.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("3.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage1_spam.atlas", "0_Monster_Fly", new Texture("3.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 3,"stage1_spam.atlas","0_Monster_Spam",new Texture("3.png") // bisa kamu kosongkan kalau tidak dipakai
+//        ));
+        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 5, "stage2_spam.atlas", "0_Monster_", new Texture("3.png")));
+
+
 //        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2,4, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
->>>>>>> 6e14e33da074520638a2bb86c6d21fb54adb2d92
     }
 
     public void handleSpawnStage1(float delta){
