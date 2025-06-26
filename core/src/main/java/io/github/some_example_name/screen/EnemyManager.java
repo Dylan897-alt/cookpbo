@@ -30,8 +30,8 @@ public class EnemyManager {
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 1, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 6, "stage2_bomber.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage4_five.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
     }
 
     public void handleSpawnStage1(float delta){
