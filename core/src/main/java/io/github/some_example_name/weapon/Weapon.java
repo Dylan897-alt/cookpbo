@@ -6,12 +6,17 @@ import io.github.some_example_name.object.BulletOwner;
 import io.github.some_example_name.object.BulletSpawner;
 
 public abstract class Weapon {
-    //Weapon cuma control berapa bullet yang di spawn, angle nya, dan kapan nembak
     protected float cooldown;
     protected float timer = 0f;
+    protected float speedModifier = 1f;
 
     public Weapon(float cooldown) {
         this.cooldown = cooldown;
+    }
+
+    public Weapon(float cooldown, float speedModifier) {
+        this.cooldown = cooldown;
+        this.speedModifier = speedModifier;
     }
 
     public void update(float delta) {

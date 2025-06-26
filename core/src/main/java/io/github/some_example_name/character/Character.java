@@ -61,7 +61,5 @@ public abstract class Character implements Collidable, Damageable {
     }
 
     public abstract void update(float delta);
-
-
 }
 

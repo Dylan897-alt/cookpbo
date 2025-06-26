@@ -9,19 +9,25 @@ public class Bullet extends GameObject implements Collidable { //pindah ke packa
     private Vector2 startPos;
     private Vector2 velocity;
     private BulletOwner owner;
-    private float speed; //ga perlu
+    private float speed = 2f;
 
-    public Bullet(Texture texture, Vector2 startPos, Vector2 direction, BulletOwner owner){
+    public Bullet(Texture texture, Vector2 startPos, Vector2 direction, BulletOwner owner, float speedModifier){
         super(new Sprite(texture));
         this.owner = owner;
-        this.speed = 5f; //ganti static global variable
+        this.speed *= speedModifier;
         this.startPos = new Vector2(startPos);
         this.velocity = new Vector2(direction).set(direction.nor().scl(speed));
-        sprite.setSize(sprite.getWidth()/10f, sprite.getHeight()/10f);
+
+        float displayHeight = .15f; // World units
+        float aspectRatio = (float) sprite.getRegionWidth() / sprite.getRegionHeight();
+        float displayWidth = displayHeight * aspectRatio;
+
+        sprite.setSize(displayWidth, displayHeight);
         sprite.setOriginCenter();
         setPosition(startPos.x, startPos.y);
         sprite.setRotation(velocity.angleDeg());
     }
+
 
     @Override
     public void update(float delta){

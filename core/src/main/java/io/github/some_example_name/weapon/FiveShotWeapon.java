@@ -19,7 +19,7 @@ public class FiveShotWeapon extends Weapon {
         // Sudut: -2*spread, -spread, 0, +spread, +2*spread
         for (int i = -2; i <= 2; i++) {
             Vector2 shotDir = baseDir.cpy().rotateDeg(i * spread);
-            spawner.spawnBullet(bulletTexture, origin.cpy(), shotDir, owner);
+            spawner.spawnBullet(bulletTexture, origin.cpy(), shotDir, owner, speedModifier);
         }
 
         resetCooldown();
