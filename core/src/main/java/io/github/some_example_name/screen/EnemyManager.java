@@ -22,15 +22,14 @@ public class EnemyManager {
 
 
     public EnemyManager(){
-<<<<<<< HEAD
-        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, new SingleShotWeapon(1.2f), new Texture("stage1_single_shot.png"), new Texture("2.png")));
-//        templateStage1.add(new EnemyTemplate(734, 672, .2f, 10, 2, new TripleShotWeapon(2.0f), new Texture("stage1_melee.png"), new Texture("2.png")));
-        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new SpamShotWeapon(4.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new FiveShotWeapon(3.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, new BomberWeapon(2.0f), new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-=======
+
+        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, 1, new Texture("stage1_single_shot.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(734, 672, .2f, 10, 2, 2, new Texture("stage1_melee.png"), new Texture("2.png")));
+        templateStage1.add(new EnemyTemplate(436, 333, .1f, 10, 2, 3, new Texture("stage2_triple_shot.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2,4, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
         templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
->>>>>>> f7018bb2d90063f8e197a4a257ea9c47872b8e2b
+
     }
 
     public void handleSpawnStage1(float delta){
