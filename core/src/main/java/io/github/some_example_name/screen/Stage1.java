@@ -39,7 +39,7 @@ public class Stage1 implements Screen {
         camera.setToOrtho(false);
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
-        this.background = new Texture("background_stage1.png"); // ✅ Load background
+        this.background = new Texture("background1.png"); // ✅ Load background
         this.player = new Player(10, 0, new Texture("ghost.png"));
         this.playerController = new PlayerController(player, viewport);
 
