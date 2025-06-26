@@ -4,54 +4,48 @@ import io.github.some_example_name.Collidable;
 import io.github.some_example_name.Damageable;
 import io.github.some_example_name.character.Enemy;
 import io.github.some_example_name.character.Player;
+import io.github.some_example_name.screen.EnemyManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class CollisionManager {
-    public void handleAllCollisions(ArrayList<Bullet> bullets, ArrayList<Collidable> collidables) {
-        checkBulletCollisions(bullets, collidables);
-        checkPlayerEnemyCollision(collidables);
+    public void handleAllCollisions(Player player, BulletManager bulletManager, EnemyManager enemyManager) {
+        checkBulletCollisions(player, bulletManager, enemyManager);
+        checkPlayerEnemyCollision(player, enemyManager.getEnemies());
     }
 
-    private void checkBulletCollisions(ArrayList<Bullet> bullets, ArrayList<Collidable> targets) {
+    private void checkBulletCollisions(Player player, BulletManager bulletManager, EnemyManager enemyManager) {
+        ArrayList<Bullet> bullets = bulletManager.getBullets();
+        ArrayList<Enemy> enemies = enemyManager.getEnemies();
         Iterator<Bullet> bulletIterator = bullets.iterator();
+        List<Bullet> toRemove = new ArrayList<>();
 
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
 
-            for (Collidable target : targets) {
-                if (bullet.getOwner() == BulletOwner.PLAYER && target instanceof Player) continue;
-                if (bullet.getOwner() == BulletOwner.ENEMY && target instanceof Enemy) continue;
-
-                if (bullet.getHitbox().overlaps(target.getHitbox())) {
-                    if (target instanceof Damageable) {
-                        ((Damageable) target).takeDamage(1); //sesuaikan lagi
+            if (bullet.getOwner() == BulletOwner.PLAYER) {
+                for (Enemy enemy : enemies) {
+                    if (bullet.getHitbox().overlaps(enemy.getHitbox())) {
+                        enemy.takeDamage(1); // adjust damage as needed
                         bulletIterator.remove();
                         break;
                     }
+                }
+            } else if (bullet.getOwner() == BulletOwner.ENEMY) {
+                if (bullet.getHitbox().overlaps(player.getHitbox())) {
+                    player.takeDamage(1); // adjust damage as needed
+                    bulletIterator.remove();
                 }
             }
         }
     }
 
-    private void checkPlayerEnemyCollision(ArrayList<Collidable> collidables) {
-        Player player = null;
-        ArrayList<Enemy> enemies = new ArrayList<>();
-
-        for (Collidable c : collidables) {
-            if (c instanceof Player) {
-                player = (Player) c;
-            } else if (c instanceof Enemy) {
-                enemies.add((Enemy) c);
-            }
-        }
-
-        if (player == null) return;
-
+    private void checkPlayerEnemyCollision(Player player, ArrayList<Enemy> enemies) {
         for (Enemy enemy : enemies) {
             if (player.getHitbox().overlaps(enemy.getHitbox())) {
-                player.takeDamage(1); //sesuaikan lagi
+                player.takeDamage(1); // adjust damage as needed
             }
         }
     }

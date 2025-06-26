@@ -5,12 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.some_example_name.character.Player;
+import io.github.some_example_name.object.BulletManager;
+import io.github.some_example_name.object.BulletOwner;
+import io.github.some_example_name.object.BulletSpawner;
 
 
 public class PlayerController {
     private final Player player;
-    private float fireCooldown = .8f;
-    private float timeSinceLastShot = 0f;
     private final FitViewport viewport;
 
 
@@ -19,36 +20,50 @@ public class PlayerController {
         this.viewport = viewport;
     }
 
-    public void handleInput(float delta) {
+    public void handleInput(float delta, BulletSpawner spawner) {
         Vector2 moveDelta = new Vector2();
         float speed = 2f;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
+        boolean isMoving = false;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveDelta.x += speed * delta;
+            player.setCurrentAnimation(player.getWalkRightAnim());
+            isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             moveDelta.x -= speed * delta;
+            player.setCurrentAnimation(player.getWalkLeftAnim());
+            isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             moveDelta.y += speed * delta;
+            player.setCurrentAnimation(player.getWalkUpAnim());
+            isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             moveDelta.y -= speed * delta;
+            player.setCurrentAnimation(player.getWalkDownAnim());
+            isMoving = true;
         }
-        player.move(moveDelta);
-        player.faceDirection(moveDelta.x);
 
-        //pindah logic nembak ke Weapon nanti
-        timeSinceLastShot += delta;
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && timeSinceLastShot >= fireCooldown) {
-            Vector2 touchPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            viewport.unproject(touchPos);
+        if (isMoving) {
+            player.move(moveDelta);
+        } else {
+            player.resetAnimation();
+        }
 
-            Vector2 startPos = player.getCenter();
-            Vector2 direction = new Vector2(touchPos).sub(startPos);
 
-            player.addBullet(startPos, direction);
-            timeSinceLastShot = 0f;
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            if(player.getWeapon().canFire()){
+                Vector2 origin = player.getCenter();
+
+                Vector2 touchPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+                viewport.unproject(touchPos);
+                Vector2 direction = new Vector2(touchPos).sub(origin);
+
+                player.getWeapon().fire(player.getBulletTexture(), origin, direction, spawner, BulletOwner.PLAYER);
+            }
         }
     }
 }

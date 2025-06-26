@@ -8,6 +8,7 @@ import io.github.some_example_name.character.Enemy;
 import io.github.some_example_name.character.Player;
 import io.github.some_example_name.object.BulletManager;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,6 +23,7 @@ public class EnemyManager {
 
 
     public EnemyManager(){
+<<<<<<< HEAD
 
         templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, 1, new Texture("stage1_single_shot.png"), new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(734, 672, .2f, 10, 2, 2, new Texture("stage1_melee.png"), new Texture("2.png")));
@@ -30,6 +32,13 @@ public class EnemyManager {
 //        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
         templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
 
+=======
+//        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, 1, new Texture("stage1_single_shot.png"), new Texture("2.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2,4, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+>>>>>>> 6e14e33da074520638a2bb86c6d21fb54adb2d92
     }
 
     public void handleSpawnStage1(float delta){
@@ -93,5 +102,9 @@ public class EnemyManager {
     public void spawnEnemy(Vector2 spawnPos){
         EnemyTemplate template = templateStage1.get(random.nextInt(templateStage1.size()));
         enemies.add(template.createEnemy(spawnPos));
+    }
+
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
     }
 }
