@@ -28,7 +28,6 @@ public class Enemy extends Character {
         this.bulletTexture = bulletTexture;
         this.weapon = weapon;
 
-        // Set initial sprite region and size
         TextureRegion firstFrame = animation.getKeyFrame(0f);
         sprite.setRegion(firstFrame);
 
@@ -44,7 +43,6 @@ public class Enemy extends Character {
     public void update(float delta) {
         stateTime += delta;
         sprite.setRegion(animation.getKeyFrame(stateTime));
-//        sprite.translateX(-2f * delta); // ganti pakai static global variable
     }
 
     public void updateWeapon(float delta, BulletManager spawner, Player player){
@@ -56,7 +54,7 @@ public class Enemy extends Character {
         }
     }
 
-    public void setWeapon(Weapon weapon){
-        this.weapon = weapon;
+    public boolean isAlive() {
+        return getHp() > 0;
     }
 }

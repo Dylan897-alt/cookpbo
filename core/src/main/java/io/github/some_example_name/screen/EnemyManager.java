@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import io.github.some_example_name.ShooterGame;
 import io.github.some_example_name.character.Enemy;
+import io.github.some_example_name.character.MeleeEnemy;
 import io.github.some_example_name.character.Player;
 import io.github.some_example_name.object.BulletManager;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class EnemyManager {
@@ -20,13 +22,16 @@ public class EnemyManager {
     private float cooldown = 1f;
     private int totalSpawneds1 = 0;//batas spawn
     private final int MAX_SPAWNs1 = 20;
+    private final Player player;
 
-
-    public EnemyManager(){
-//        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage_1_single.atlas", "0_Monster_Idle", new Texture("3.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("3.png")));
-//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2,4, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
-//        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
+    public EnemyManager(Player player){
+        this.player = player;
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 1, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 6, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
     }
 
     public void handleSpawnStage1(float delta){
@@ -81,15 +86,26 @@ public class EnemyManager {
     }
 
     public void updateEnemies(float delta, BulletManager bulletManager, Player player){
-        for(Enemy enemy: enemies){
+        Iterator<Enemy> iterator = enemies.iterator();
+        while (iterator.hasNext()) {
+            Enemy enemy = iterator.next();
             enemy.update(delta);
             enemy.updateWeapon(delta, bulletManager, player);
+
+            if (!enemy.isAlive()) {
+                // Optional: play explosion animation, sound, or grant EXP
+                iterator.remove();
+            }
         }
     }
 
     public void spawnEnemy(Vector2 spawnPos){
         EnemyTemplate template = templateStage1.get(random.nextInt(templateStage1.size()));
-        enemies.add(template.createEnemy(spawnPos));
+        Enemy enemy = template.createEnemy(spawnPos);
+        if(enemy instanceof MeleeEnemy){
+            ((MeleeEnemy) enemy).setTargetPlayer(player);
+        }
+        enemies.add(enemy);
     }
 
     public ArrayList<Enemy> getEnemies(){

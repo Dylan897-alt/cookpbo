@@ -63,6 +63,6 @@ public class SpamShotWeapon extends Weapon {
     private void fireRandom() {
         float angle = MathUtils.random(0f, 360f);
         Vector2 dir = new Vector2(1, 0).setAngleDeg(angle);
-        spawner.spawnBullet(bulletTexture, origin.cpy(), dir, owner);
+        spawner.spawnBullet(bulletTexture, origin.cpy(), dir, owner, speedModifier);
     }
 }
