@@ -2,6 +2,7 @@ package io.github.some_example_name.character;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -23,7 +24,8 @@ public class Player extends Character {
     private float animationTime = 0f;
     private Weapon weapon;
     private Texture bulletTexture;
-    ArrayList<Bullet> bullets = new ArrayList<>(); //hapus, ganti di bullet manager
+    private float invincibilityCooldown = 0f;
+    private static final float INVINCIBILITY_FRAME = 1f; // 1 second
 
     public Player(float hp, float exp, Texture spriteSheet, Texture bulletTexture) {
         super(new Sprite(), hp, exp);
@@ -46,7 +48,7 @@ public class Player extends Character {
         sprite.setRegion(currentAnimation.getKeyFrame(0));
 
         this.bulletTexture = bulletTexture;
-        this.weapon = new SingleShotWeapon(.8f);
+        this.weapon = new SingleShotWeapon(.8f, 1.5f);
     }
 
     @Override
@@ -69,6 +71,9 @@ public class Player extends Character {
             sprite.setRegion(currentAnimation.getKeyFrame(animationTime, true));
         }
         weapon.update(delta);
+        if (invincibilityCooldown > 0f) {
+            invincibilityCooldown -= delta;
+        }
     }
 
     public Animation<TextureRegion> getWalkRightAnim() { return walkRightAnim; }
@@ -98,7 +103,22 @@ public class Player extends Character {
     }
 
     @Override
-    public void takeDamage(float damage) {
-        super.takeDamage(damage);  // Memanggil metode takeDamage dari kelas induk
+    public void takeDamage(float damage){
+        if (canTakeDamage()) {
+            super.takeDamage(damage);
+            invincibilityCooldown = INVINCIBILITY_FRAME;
+            // Optional: play damage sound, flash sprite, etc.
+        }
+    }
+
+    public boolean canTakeDamage(){
+        return invincibilityCooldown <= 0f;
+    }
+
+    @Override
+    public void draw(SpriteBatch batch){
+        if (canTakeDamage() || ((int)(invincibilityCooldown * 10) % 2 == 0)) {
+            sprite.draw(batch); // flashes while invincible
+        }
     }
 }

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import io.github.some_example_name.character.Enemy;
+import io.github.some_example_name.character.*;
 import io.github.some_example_name.weapon.*;
 
 import java.security.cert.CertificateParsingException;
@@ -30,17 +30,19 @@ public class EnemyTemplate {
     }
 
     public Enemy createEnemy(Vector2 spawnPos){
-        Weapon weapon = null;
+        Weapon weapon = new NoWeapon();
         if(type == 1){
-            weapon = new SingleShotWeapon(1.2f);
+            return new SingleShotEnemy(frameDuration, hp, exp, new TextureAtlas(Gdx.files.internal(filePath)), animationName, bulletTexture, spawnPos);
         } else if(type == 2){
-            weapon = new TripleShotWeapon(2.0f);
+            return new TripleShotEnemy(frameDuration, hp, exp, new TextureAtlas(Gdx.files.internal(filePath)), animationName, bulletTexture, spawnPos);
         } else if(type == 3){
-            weapon = new SpamShotWeapon(4.0f);
+            return new SpamShotEnemy(frameDuration, hp, exp, new TextureAtlas(Gdx.files.internal(filePath)), animationName, bulletTexture, spawnPos);
         } else if(type == 4){
-            weapon =  new FiveShotWeapon(3f);
+            return new FiveShotEnemy(frameDuration, hp, exp, new TextureAtlas(Gdx.files.internal(filePath)), animationName, bulletTexture, spawnPos);
         } else if(type == 5){
-            weapon = new BomberWeapon(2.0f);
+            return new BomberEnemy(frameDuration, hp, exp, new TextureAtlas(Gdx.files.internal(filePath)), animationName, bulletTexture, spawnPos);
+        } else if(type == 6){
+            return new MeleeEnemy(frameDuration, hp, exp, new TextureAtlas(Gdx.files.internal(filePath)), animationName, bulletTexture, spawnPos);
         }
         return new Enemy(frameDuration, hp, exp, weapon, new TextureAtlas(Gdx.files.internal(filePath)), animationName, bulletTexture, spawnPos);
     }

@@ -11,8 +11,8 @@ public class BulletManager implements BulletSpawner{
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
     @Override
-    public void spawnBullet(Texture texture, Vector2 origin, Vector2 target, BulletOwner owner){
-        bullets.add(new Bullet(texture, origin, target, owner));
+    public void spawnBullet(Texture texture, Vector2 origin, Vector2 target, BulletOwner owner, float speedModifier){
+        bullets.add(new Bullet(texture, origin, target, owner, speedModifier));
     }
 
     public void updateBullets(float delta){

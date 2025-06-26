@@ -4,10 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import io.github.some_example_name.ShooterGame;
-import io.github.some_example_name.weapon.SingleShotWeapon;
-import io.github.some_example_name.weapon.Weapon;
+import io.github.some_example_name.weapon.TripleShotWeapon;
 
-public class SingleShotEnemy extends Enemy{
+public class TripleShotEnemy extends Enemy {
     private float moveSpeed = .6f;
     private int directionIndex = 0; // 0 = down, 1 = left, 2 = up, 3 = right
 
@@ -18,8 +17,8 @@ public class SingleShotEnemy extends Enemy{
         new Vector2(1, 0)    // right
     };
 
-    public SingleShotEnemy(float frameDuration, float hp, float exp, TextureAtlas atlas, String animationName, Texture bulletTexture, Vector2 spawnPos) {
-        super(frameDuration, hp, exp, new SingleShotWeapon(1.2f), atlas, animationName, bulletTexture, spawnPos);
+    public TripleShotEnemy(float frameDuration, float hp, float exp, TextureAtlas atlas, String animationName, Texture bulletTexture, Vector2 spawnPos) {
+        super(frameDuration, hp, exp, new TripleShotWeapon(2f), atlas, animationName, bulletTexture, spawnPos);
     }
 
     @Override

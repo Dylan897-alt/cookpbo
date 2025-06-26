@@ -12,15 +12,17 @@ public class BomberWeapon extends Weapon {
 
     @Override
     public void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner, BulletOwner owner) {
-        Vector2 baseDir = new Vector2(direction).nor();
+        // Cardinal directions
+        Vector2[] directions = new Vector2[] {
+            new Vector2(1, 0),   // right
+            new Vector2(-1, 0),  // left
+            new Vector2(0, 1),   // up
+            new Vector2(0, -1)   // down
+        };
 
-        // Arah utama ke player
-        spawner.spawnBullet(bulletTexture, origin.cpy(), baseDir.cpy(), owner);
-
-        // Tambahan arah: +90, +180, +270 derajat
-        spawner.spawnBullet(bulletTexture, origin.cpy(), baseDir.cpy().rotateDeg(90), owner);
-        spawner.spawnBullet(bulletTexture, origin.cpy(), baseDir.cpy().rotateDeg(180), owner);
-        spawner.spawnBullet(bulletTexture, origin.cpy(), baseDir.cpy().rotateDeg(270), owner);
+        for (Vector2 dir : directions) {
+            spawner.spawnBullet(bulletTexture, origin.cpy(), dir, owner, speedModifier);
+        }
 
         resetCooldown();
     }
