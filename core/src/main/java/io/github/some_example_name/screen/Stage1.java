@@ -42,7 +42,7 @@ public class Stage1 implements Screen {
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
         this.background = new Texture("backgroundstage1.png"); // Load background
-        this.player = new Player(10, 0, new Texture("mc_right.png"), new Texture("2.png"));
+        this.player = new Player(10, 0, new Texture("mc.png"), new Texture("3.png"));
         this.playerController = new PlayerController(player, viewport);
 
         this.crosshair = new Crosshair(new Texture("crosshair.png"), viewport, player);

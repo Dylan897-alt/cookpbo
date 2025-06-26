@@ -25,14 +25,13 @@ public class Player extends Character {
     private Texture bulletTexture;
     ArrayList<Bullet> bullets = new ArrayList<>(); //hapus, ganti di bullet manager
 
-    public Player(float hp, float exp, Texture texture, Texture bulletTexture) {
-        super(new Sprite(texture), hp, exp);
+    public Player(float hp, float exp, Texture spriteSheet, Texture bulletTexture) {
+        super(new Sprite(), hp, exp);
         sprite.setSize(1f, 1f);
         float frameDuration = 0.1f;
 
         int frameCols = 8;
         int frameRows = 4;
-        Texture spriteSheet = new Texture("mc.png");
 
 
         int frameWidth = spriteSheet.getWidth() / frameCols;

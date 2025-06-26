@@ -24,7 +24,7 @@ public class EnemyManager {
 
     public EnemyManager(){
 //        templateStage1.add(new EnemyTemplate(713, 541, .2f, 10, 2, 1, new Texture("stage1_single_shot.png"), new Texture("2.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("2.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("3.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 10, 2, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2,4, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));
 //        templateStage1.add(new EnemyTemplate(48, 32, .1f, 10, 2, 5, new Texture("Canine_Black_Attack.png"), new Texture("2.png")));

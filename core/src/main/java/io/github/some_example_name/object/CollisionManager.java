@@ -20,7 +20,6 @@ public class CollisionManager {
         ArrayList<Bullet> bullets = bulletManager.getBullets();
         ArrayList<Enemy> enemies = enemyManager.getEnemies();
         Iterator<Bullet> bulletIterator = bullets.iterator();
-        List<Bullet> toRemove = new ArrayList<>();
 
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
