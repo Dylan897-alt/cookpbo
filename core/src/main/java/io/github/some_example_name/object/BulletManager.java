@@ -41,4 +41,12 @@ public class BulletManager implements BulletSpawner{
             bullet.draw(batch);
         }
     }
+
+    public ArrayList<Bullet> getBullets(){
+        return bullets;
+    }
+
+    public void removeBullet(Bullet bullet) {
+        bullets.remove(bullet);
+    }
 }

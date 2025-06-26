@@ -23,20 +23,34 @@ public class PlayerController {
         Vector2 moveDelta = new Vector2();
         float speed = 2f;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
+        boolean isMoving = false;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveDelta.x += speed * delta;
+            player.setCurrentAnimation(player.getWalkRightAnim());
+            isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             moveDelta.x -= speed * delta;
+            player.setCurrentAnimation(player.getWalkLeftAnim());
+            isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             moveDelta.y += speed * delta;
+            player.setCurrentAnimation(player.getWalkUpAnim());
+            isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             moveDelta.y -= speed * delta;
+            player.setCurrentAnimation(player.getWalkDownAnim());
+            isMoving = true;
         }
-        player.move(moveDelta);
-        player.faceDirection(moveDelta.x);
+
+        if (isMoving) {
+            player.move(moveDelta);
+        } else {
+            player.resetAnimation();
+        }
 
         //pindah logic nembak ke Weapon nanti
         timeSinceLastShot += delta;
