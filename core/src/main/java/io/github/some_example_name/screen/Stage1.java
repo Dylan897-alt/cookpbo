@@ -18,16 +18,19 @@ import io.github.some_example_name.object.BulletManager;
 public class Stage1 implements Screen {
     public static final float PPU = 48f;
     final ShooterGame game;
+
     Player player;
     Enemy dog1;
     Crosshair crosshair;
     PlayerController playerController;
     BulletManager bulletManager;
     EnemyManager enemyManager;
+
     OrthographicCamera camera;
     FitViewport viewport;
     SpriteBatch batch;
 
+    Texture background; // ✅ Background
 
     public Stage1(final ShooterGame game) {
         this.game = game;
@@ -36,10 +39,9 @@ public class Stage1 implements Screen {
         camera.setToOrtho(false);
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
+        this.background = new Texture("background_stage1.png"); // ✅ Load background
         this.player = new Player(10, 0, new Texture("ghost.png"));
         this.playerController = new PlayerController(player, viewport);
-
-        //this.dog1 = new Enemy(48, 32, .1f, 10, 2, , new Texture("Canine_Black_Attack.png"), new Vector2(0, 0));
 
         this.crosshair = new Crosshair(new Texture("crosshair.png"), viewport, player);
         this.bulletManager = new BulletManager();
@@ -60,7 +62,6 @@ public class Stage1 implements Screen {
         enemyManager.handleSpawnStage1(delta);
         enemyManager.updateEnemies(delta, bulletManager, player);
 
-        //nanti ganti di bullet manager
         for (int i = 0; i < player.getBullets().size(); i++) {
             player.getBullets().get(i).update(delta);
         }
@@ -76,12 +77,13 @@ public class Stage1 implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT); // ✅ Draw background
+
         player.draw(batch);
         crosshair.draw(batch);
         bulletManager.drawAll(batch);
         enemyManager.drawAll(batch);
 
-        //nanti ganti di bullet manager
         for (int i = 0; i < player.getBullets().size(); i++) {
             player.getBullets().get(i).draw(batch);
         }
@@ -94,19 +96,13 @@ public class Stage1 implements Screen {
         viewport.apply();
     }
 
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {}
-
-    @Override
-    public void hide() {}
+    @Override public void pause() {}
+    @Override public void resume() {}
+    @Override public void hide() {}
 
     @Override
     public void dispose() {
         batch.dispose();
-        //tambahin Ward
+        background.dispose(); // ✅ Dispose background
     }
 }

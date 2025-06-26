@@ -28,6 +28,19 @@ public class Bullet extends GameObject implements Collidable { //pindah ke packa
         sprite.translate(velocity.x * delta, velocity.y * delta);
     }
 
+    public float getY() {
+        return sprite.getY();
+    }
+
+    public float getX() {
+        return sprite.getX();//diget buat batas yg di bulman
+    }
+
+    public Vector2 getVelocity() {
+        return velocity; //bawah bs ke atas
+    }
+
+
     public BulletOwner getOwner(){
         return owner;
     }
