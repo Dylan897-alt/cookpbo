@@ -19,13 +19,6 @@ public class MainMenu implements Screen {
     SpriteBatch batch;
     OrthographicCamera camera;
     FitViewport viewport;
-
-    Texture img;
-    TextureRegion[] frames;
-    Animation<TextureRegion> animation;
-    float stateTime;
-    Sprite sprite;
-
     Texture background;
 
     public MainMenu(final ShooterGame game) {
@@ -38,19 +31,6 @@ public class MainMenu implements Screen {
 
         // Background
         this.background = new Texture("etgmainmenu.png");
-
-        // Animation setup
-        this.img = new Texture("Canine_Black_Attack.png");
-        TextureRegion[][] tmpFrames = TextureRegion.split(img, 48, 32);
-        frames = new TextureRegion[tmpFrames[0].length];
-        for (int i = 0; i < tmpFrames[0].length; i++) {
-            frames[i] = tmpFrames[0][i];
-        }
-        animation = new Animation<>(0.1f, frames);
-        stateTime = 0f;
-        sprite = new Sprite(frames[0]);
-        sprite.setSize(48 / PPU, 32 / PPU);
-        sprite.setPosition(0, 0);
     }
 
     @Override
@@ -78,18 +58,7 @@ public class MainMenu implements Screen {
 
 
     private void logic() {
-        float delta = Gdx.graphics.getDeltaTime();
-        stateTime += delta;
 
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        sprite.setRegion(currentFrame);
-
-        float newX = sprite.getX() + 2f * delta;
-        sprite.setX(newX);
-
-        if (sprite.getX() > game.VIRTUAL_WIDTH) {
-            sprite.setX(-sprite.getWidth());
-        }
     }
 
     private void draw() {
@@ -102,9 +71,6 @@ public class MainMenu implements Screen {
         batch.begin();
         // Draw background
         batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
-
-        // Draw animated sprite
-        sprite.draw(batch);
 
         // Draw "Press Space" text
         font.draw(batch, "Press [Space] to start", 2f, 1f);
@@ -126,6 +92,5 @@ public class MainMenu implements Screen {
         batch.dispose();
         font.dispose();
         background.dispose();
-        img.dispose();
     }
 }

@@ -1,5 +1,6 @@
 package io.github.some_example_name.character;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -15,21 +16,27 @@ public class Enemy extends Character {
     private float stateTime;
     private Weapon weapon;
     private Texture bulletTexture;
+    private TextureAtlas atlas;
 
-    public Enemy(int frameWidth, int frameHeight, float frameDuration, float hp, float exp, Weapon weapon, Texture spriteSheet, Texture bulletTexture, Vector2 spawnPos) {
+    public Enemy(float frameDuration, float hp, float exp, Weapon weapon, TextureAtlas atlas, String animationName, Texture bulletTexture, Vector2 spawnPos) {
         super(new Sprite(), hp, exp);
-
-        this.animation = FrameHandler.createAnimation(spriteSheet, frameWidth, frameHeight, frameDuration, true);
+        this.atlas = atlas;
+        Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions(animationName);
+        this.animation = new Animation<>(frameDuration, frames, Animation.PlayMode.LOOP);
         this.stateTime = 0f;
 
         this.bulletTexture = bulletTexture;
         this.weapon = weapon;
 
-        sprite.setRegion(animation.getKeyFrame(0f));
-        float displayHeight = 1f; // constant height in world units
-        float aspectRatio = (float) frameWidth / (float) frameHeight;
+        // Set initial sprite region and size
+        TextureRegion firstFrame = animation.getKeyFrame(0f);
+        sprite.setRegion(firstFrame);
+
+        float displayHeight = 1f; // World units
+        float aspectRatio = (float) firstFrame.getRegionWidth() / firstFrame.getRegionHeight();
         float displayWidth = displayHeight * aspectRatio;
         sprite.setSize(displayWidth, displayHeight);
+
         this.setPosition(spawnPos.x, spawnPos.y);
     }
 

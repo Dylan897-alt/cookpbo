@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.some_example_name.PlayerController;
 import io.github.some_example_name.ShooterGame;
+import io.github.some_example_name.object.CollisionManager;
 import io.github.some_example_name.object.Crosshair;
 import io.github.some_example_name.character.Enemy;
 import io.github.some_example_name.character.Player;
@@ -20,11 +21,11 @@ public class Stage1 implements Screen {
     final ShooterGame game;
 
     Player player;
-    Enemy dog1;
     Crosshair crosshair;
     PlayerController playerController;
     BulletManager bulletManager;
     EnemyManager enemyManager;
+    CollisionManager collisionManager;
 
     OrthographicCamera camera;
     FitViewport viewport;
@@ -39,13 +40,14 @@ public class Stage1 implements Screen {
         camera.setToOrtho(false);
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
-        this.background = new Texture("background1.png"); // ✅ Load background
-        this.player = new Player(10, 0, new Texture("ghost.png"));
+        this.background = new Texture("backgroundstage1.png"); // ✅ Load background
+        this.player = new Player(10, 0, new Texture("mc_right.png"), new Texture("2.png"));
         this.playerController = new PlayerController(player, viewport);
 
         this.crosshair = new Crosshair(new Texture("crosshair.png"), viewport, player);
         this.bulletManager = new BulletManager();
         this.enemyManager = new EnemyManager();
+        this.collisionManager = new CollisionManager();
     }
 
     @Override
@@ -55,17 +57,13 @@ public class Stage1 implements Screen {
 
     @Override
     public void render(float delta) {
-        playerController.handleInput(delta);
+        playerController.handleInput(delta, bulletManager);
         player.update(delta);
         crosshair.update(delta);
         bulletManager.updateBullets(delta);
         enemyManager.handleSpawnStage1(delta);
         enemyManager.updateEnemies(delta, bulletManager, player);
-
-        for (int i = 0; i < player.getBullets().size(); i++) {
-            player.getBullets().get(i).update(delta);
-        }
-
+        collisionManager.handleAllCollisions(player, bulletManager, enemyManager);
         draw();
     }
 
@@ -84,9 +82,6 @@ public class Stage1 implements Screen {
         bulletManager.drawAll(batch);
         enemyManager.drawAll(batch);
 
-        for (int i = 0; i < player.getBullets().size(); i++) {
-            player.getBullets().get(i).draw(batch);
-        }
         batch.end();
     }
 

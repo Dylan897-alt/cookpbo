@@ -20,18 +20,40 @@ public class BulletManager implements BulletSpawner{
             Bullet bullet = bullets.get(i);
             bullet.update(delta);
 
-            // Batasi peluru dari enemy tidak keluar batas atas/bawah
-            if (bullet.getOwner() == BulletOwner.ENEMY) {
-                float y = bullet.getY();
-                float vy = bullet.getVelocity().y;
+//            // Batasi peluru dari enemy tidak keluar batas atas/bawah
+//            if (bullet.getOwner() == BulletOwner.ENEMY) {
+//                float y = bullet.getY();
+//                float vy = bullet.getVelocity().y;
+//
+//                // Hanya hapus jika sudah keluar margin DAN bergerak lebih jauh (bukan sedang menuju ke dalam)
+//                if ((y < 1f && vy <= 0) || (y > ShooterGame.VIRTUAL_HEIGHT - 1f && vy >= 0)) {
+//                    bullets.remove(i);
+//                    continue;
+//                }
+//            }
+            float y = bullet.getY();
+            float vy = bullet.getVelocity().y;
+            float x = bullet.getX();
+            float vx = bullet.getVelocity().x;
 
-                // Hanya hapus jika sudah keluar margin DAN bergerak lebih jauh (bukan sedang menuju ke dalam)
-                if ((y < 1f && vy <= 0) || (y > ShooterGame.VIRTUAL_HEIGHT - 1f && vy >= 0)) {
-                    bullets.remove(i);
-                    continue;
-                }
+            if (y < 0 && vy <= 0) {
+                bullets.remove(i);
+                continue;
             }
 
+            if (y > ShooterGame.VIRTUAL_HEIGHT - 1f && vy >= 0) {
+                bullets.remove(i);
+                continue;
+            }
+
+            if (x < 0 && vx <= 0) {
+                bullets.remove(i);
+                continue;
+            }
+
+            if (x > ShooterGame.VIRTUAL_WIDTH && vx >= 0) {
+                bullets.remove(i);
+            }
         }
     }
 
@@ -40,5 +62,13 @@ public class BulletManager implements BulletSpawner{
         for (Bullet bullet : bullets){
             bullet.draw(batch);
         }
+    }
+
+    public ArrayList<Bullet> getBullets(){
+        return bullets;
+    }
+
+    public void removeBullet(Bullet bullet) {
+        bullets.remove(bullet);
     }
 }
