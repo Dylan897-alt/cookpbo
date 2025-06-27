@@ -22,8 +22,8 @@ public class PlayerController {
 
     public void handleInput(float delta, BulletSpawner spawner) {
         Vector2 moveDelta = new Vector2();
-        float baseSpeed = 3f;
-        float focusSpeed = 1.5f;
+        float baseSpeed = 3f * ShooterGame.SCALE;
+        float focusSpeed = 1.5f * ShooterGame.SCALE;
         float speed;
 
         if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){

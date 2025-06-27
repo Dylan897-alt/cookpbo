@@ -11,7 +11,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.some_example_name.PlayerController;
 import io.github.some_example_name.ShooterGame;
@@ -26,7 +27,6 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class Stage1 implements Screen {
-    public static final float PPU = 48f;
     final ShooterGame game;
     private boolean isGameOver = false; //untuk ngecek dia gameover/ga
     private BitmapFont font;
@@ -56,7 +56,7 @@ public class Stage1 implements Screen {
             this.stateTime = 0f;
         }
     }
-    private final ArrayList<ActiveAnimation> activeExplosions = new ArrayList<>();
+    private ArrayList<ActiveAnimation> activeExplosions = new ArrayList<>();
 
 
     public Stage1(final ShooterGame game) {
@@ -85,9 +85,22 @@ public class Stage1 implements Screen {
     @Override
     public void show() {
         viewport.apply();
-        font = new BitmapFont();
-        font.getData().setScale(0.07f);
-        this.deathAnimation = FrameHandler.createAnimation(new Texture("enemy-explosion.png"), 80, 80, .1f, false);
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Kenney Future.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 32; // Adjust based on your world scale
+        parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
+        parameter.minFilter = Texture.TextureFilter.Linear;
+        parameter.magFilter = Texture.TextureFilter.Linear;
+
+        font = generator.generateFont(parameter);
+        generator.dispose();
+        font.getData().setScale(0.2f);
+
+        this.deathAnimation = FrameHandler.createAnimation(
+            new Texture("enemy-explosion.png"), 80, 80, .1f, false
+        );
+
         this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("08. Quiz! (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
@@ -134,8 +147,8 @@ public class Stage1 implements Screen {
 
         batch.begin();
         batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT); // Draw background
-        font.draw(batch, "EXP: " + (int)player.getExp(), 0.2f, ShooterGame.VIRTUAL_HEIGHT - 0.2f);
-        font.draw(batch, "LVL: " + player.getLevel(), 3f, ShooterGame.VIRTUAL_HEIGHT - 0.4f);
+        font.draw(batch, "EXP: " + (int)player.getExp() + "/" + (int)player.getExpToNextLevel(), (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
+        font.draw(batch, "LVL: " + (int)player.getLevel(), (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
         player.draw(batch); // your existing draw call
 
         player.draw(batch);
@@ -145,7 +158,7 @@ public class Stage1 implements Screen {
 
         for (ActiveAnimation anim : activeExplosions) {
             TextureRegion frame = deathAnimation.getKeyFrame(anim.stateTime);
-            float size = 1f; // adjust for proper scale
+            float size = 1f * ShooterGame.SCALE; // adjust for proper scale
             batch.draw(frame, anim.position.x - size / 2, anim.position.y - size / 2, size, size);
         }
 

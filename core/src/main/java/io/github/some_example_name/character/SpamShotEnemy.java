@@ -9,7 +9,7 @@ import io.github.some_example_name.weapon.SpamShotWeapon;
 
 public class SpamShotEnemy extends Enemy {
     private Vector2 targetPos;
-    private float moveSpeed = .7f;
+    private float moveSpeed = .7f * ShooterGame.SCALE;
 
     public SpamShotEnemy(float frameDuration, float hp, float exp, TextureAtlas atlas, String animationName, Texture bulletTexture, Vector2 spawnPos) {
         super(frameDuration, hp, exp, new SpamShotWeapon(2f), atlas, animationName, bulletTexture, spawnPos);
@@ -49,7 +49,7 @@ public class SpamShotEnemy extends Enemy {
         float maxX = ShooterGame.VIRTUAL_WIDTH - spriteWidth;
 
         float minY = 0f;
-        float maxY = ShooterGame.VIRTUAL_HEIGHT - .65f - spriteHeight;
+        float maxY = ShooterGame.VIRTUAL_HEIGHT - (.65f * ShooterGame.SCALE) - spriteHeight;
 
         float x = MathUtils.random(minX, maxX);
         float y = MathUtils.random(minY, maxY);

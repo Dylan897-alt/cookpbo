@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class Player extends Character {
     private int level = 1;
-    private float expToNextLevel = 10f;
+    private int expToNextLevel = 10;
     private final ArrayList<Upgrade> upgrades = new ArrayList<>();
 
     private Animation<TextureRegion> walkRightAnim;
@@ -55,7 +55,7 @@ public class Player extends Character {
         sprite.setRegion(currentAnimation.getKeyFrame(0));
 
 
-        float displayHeight = .6f;
+        float displayHeight = .6f * ShooterGame.SCALE;
         float aspectRatio = (float) firstFrame.getRegionWidth() / firstFrame.getRegionHeight();
         float displayWidth = displayHeight * aspectRatio;
         sprite.setSize(displayWidth, displayHeight);
@@ -76,7 +76,7 @@ public class Player extends Character {
     public void move(Vector2 delta) {
         sprite.translate(delta.x, delta.y);
         float clampedX = MathUtils.clamp(sprite.getX(), 0, ShooterGame.VIRTUAL_WIDTH - sprite.getWidth());
-        float clampedY = MathUtils.clamp(sprite.getY(), 0, ShooterGame.VIRTUAL_HEIGHT - .65f - sprite.getHeight());
+        float clampedY = MathUtils.clamp(sprite.getY(), 0, ShooterGame.VIRTUAL_HEIGHT - (.65f * ShooterGame.SCALE) - sprite.getHeight());
 
         sprite.setPosition(clampedX, clampedY);
     }
@@ -135,7 +135,7 @@ public class Player extends Character {
     @Override
     public void draw(SpriteBatch batch){
         if (canTakeDamage() || ((int)(invincibilityCooldown * 10) % 2 == 0)) {
-            sprite.draw(batch); // flashes while invincible
+            sprite.draw(batch);
         }
     }
 
@@ -152,9 +152,7 @@ public class Player extends Character {
 
     private void levelUp() {
         level++;
-        float excess = getExp() - expToNextLevel;
-        expToNextLevel *= 1.5f;
-        setExp(excess);
+        expToNextLevel = (int) Math.ceil(expToNextLevel * 1.5);
 
         if (level <= 10 && level - 1 < upgrades.size()) {
             upgrades.get(level - 1).apply(this);
@@ -165,4 +163,7 @@ public class Player extends Character {
         }
     }
 
+    public int getExpToNextLevel(){
+        return expToNextLevel;
+    }
 }

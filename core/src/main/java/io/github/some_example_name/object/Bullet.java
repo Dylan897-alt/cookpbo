@@ -4,13 +4,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import io.github.some_example_name.Collidable;
 import io.github.some_example_name.Damageable;
+import io.github.some_example_name.ShooterGame;
 
 public class Bullet extends GameObject implements Collidable { //pindah ke package object, terus ganti extend GameObject
     private Vector2 startPos;
     private Vector2 velocity;
     private BulletOwner ownerType;
     private Damageable ownerEntity;
-    private float speed = 2f;
+    private float speed = 2f * ShooterGame.SCALE;
 
     public Bullet(Texture texture, Vector2 startPos, Vector2 direction, BulletOwner ownerType, Damageable ownerEntity, float speedModifier){
         super(new Sprite(texture));
@@ -20,7 +21,7 @@ public class Bullet extends GameObject implements Collidable { //pindah ke packa
         this.startPos = new Vector2(startPos);
         this.velocity = new Vector2(direction).set(direction.nor().scl(speed));
 
-        float displayHeight = .15f; // World units
+        float displayHeight = .15f * ShooterGame.SCALE; // World units
         float aspectRatio = (float) sprite.getRegionWidth() / sprite.getRegionHeight();
         float displayWidth = displayHeight * aspectRatio;
 
