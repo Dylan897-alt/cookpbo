@@ -80,7 +80,7 @@ public class EnemyManager {
     }
 
 
-    public void handleSpawnStage2(float delta){
+    public void handleSpawnStage2(float delta, boolean isStageCleared){
 
     }
 

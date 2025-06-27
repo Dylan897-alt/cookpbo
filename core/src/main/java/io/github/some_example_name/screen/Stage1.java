@@ -1,6 +1,7 @@
 package io.github.some_example_name.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.some_example_name.PlayerController;
 import io.github.some_example_name.ShooterGame;
@@ -85,16 +87,16 @@ public class Stage1 implements Screen {
     public void show() {
         viewport.apply();
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Kenney Future.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("VT323-Regular.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 32;
+        parameter.size = 40;
         parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
 
         font = generator.generateFont(parameter);
         generator.dispose();
-        font.getData().setScale(0.2f);
+        font.getData().setScale(0.007f * ShooterGame.SCALE);
 
         this.deathAnimation = FrameHandler.createAnimation(
             new Texture("enemy-explosion.png"), 80, 80, .1f, false
@@ -115,10 +117,14 @@ public class Stage1 implements Screen {
             game.setScreen(new GameOver(game));
             return;
         }
+        if (isStageCleared && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            game.setScreen(new Stage2(game, this.player));
+        }
         if (!bgMusic.isPlaying() && !isStageCleared) {
             isStageCleared = true;
             System.out.println("Stage Cleared!");
         }
+
 
         playerController.handleInput(delta, bulletManager);
         player.update(delta);
@@ -153,10 +159,20 @@ public class Stage1 implements Screen {
         batch.begin();
         batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 
-        font.draw(batch, "EXP: " + (int)player.getExp() + "/" + (int)player.getExpToNextLevel(),
-            (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
+        font.getData().setScale(0.007f * ShooterGame.SCALE);
+        font.draw(batch, "EXP: " + (int)player.getExp() + " / " + (int)player.getExpToNextLevel(),
+            (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
         font.draw(batch, "LVL: " + (int)player.getLevel(),
-            (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
+            (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
+        if (isStageCleared) {
+            font.getData().setScale(0.02f * ShooterGame.SCALE);
+
+            float textX = 4f * ShooterGame.SCALE;
+            float textY = 3f * ShooterGame.SCALE;
+
+        font.draw(batch, "Stage Cleared\nPress Space to Continue", textX, textY,0, Align.center, false);
+        }
+
 
         // ✅ Gambar tombol di kanan atas, tinggi setara teks
         float buttonHeight = 0.8f * ShooterGame.SCALE;
