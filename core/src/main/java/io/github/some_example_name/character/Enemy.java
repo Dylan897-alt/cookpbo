@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import io.github.some_example_name.ShooterGame;
 import io.github.some_example_name.object.BulletManager;
 import io.github.some_example_name.object.BulletOwner;
 import io.github.some_example_name.screen.Stage1;
@@ -32,7 +33,7 @@ public class Enemy extends Character {
         TextureRegion firstFrame = animation.getKeyFrame(0f);
         sprite.setRegion(firstFrame);
 
-        float displayHeight = 1f; // World units
+        float displayHeight = 1f * ShooterGame.SCALE; // World units
         float aspectRatio = (float) firstFrame.getRegionWidth() / firstFrame.getRegionHeight();
         float displayWidth = displayHeight * aspectRatio;
         sprite.setSize(displayWidth, displayHeight);

@@ -8,10 +8,7 @@ import io.github.some_example_name.character.Enemy;
 import io.github.some_example_name.character.MeleeEnemy;
 import io.github.some_example_name.character.Player;
 import io.github.some_example_name.object.BulletManager;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class EnemyManager {
@@ -27,12 +24,12 @@ public class EnemyManager {
 
     public EnemyManager(Player player){
         this.player = player;
-        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 5, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 10, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 6, "stage4_five.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 10, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage4_five.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
     }
 
     public void setListener(EnemyDeathListener listener){
@@ -47,9 +44,9 @@ public class EnemyManager {
         if (cooldown <= 0) {
             cooldown = 1f + random.nextFloat() * 2f;
 
-            float enemyWidth = 0.8f;
-            float enemyHeight = 0.6f;
-            final float margin = 0.75f;
+            float enemyWidth = 0.8f * ShooterGame.SCALE;
+            float enemyHeight = 0.6f * ShooterGame.SCALE;
+            final float margin = 0.75f * ShooterGame.SCALE;
 
             int side = random.nextInt(4);
             float x = 0, y = 0;

@@ -3,14 +3,15 @@ package io.github.some_example_name.character;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import io.github.some_example_name.ShooterGame;
 import io.github.some_example_name.weapon.BomberWeapon;
 import io.github.some_example_name.weapon.TripleShotWeapon;
 
 public class BomberEnemy extends Enemy {
     private float angle = 0f;
-    private float radius = 1.5f;
+    private float radius = 1.5f * ShooterGame.SCALE;
     private float rotationSpeed = 90f; // degrees per second
-    private float downwardSpeed = 0.3f;
+    private float downwardSpeed = 0.3f * ShooterGame.SCALE;
 
     private final Vector2 center;
 
@@ -29,6 +30,10 @@ public class BomberEnemy extends Enemy {
 
         // Optional: drift the center down as it rotates
         center.y -= downwardSpeed * delta;
+
+        if (center.y + radius < 0) {
+            center.y = ShooterGame.VIRTUAL_HEIGHT - (.65f * ShooterGame.SCALE);
+        }
 
         // Calculate new position on the circle
         float newX = center.x + radius * (float)Math.cos(rad);

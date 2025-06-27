@@ -2,13 +2,11 @@ package io.github.some_example_name.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import io.github.some_example_name.character.*;
 import io.github.some_example_name.weapon.*;
 
-import java.security.cert.CertificateParsingException;
 
 public class EnemyTemplate {
     private float hp;

@@ -3,11 +3,12 @@ package io.github.some_example_name.character;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import io.github.some_example_name.ShooterGame;
 import io.github.some_example_name.weapon.NoWeapon;
 
 public class MeleeEnemy extends Enemy {
     private Player targetPlayer;
-    private float moveSpeed = 1f;
+    private float moveSpeed = 1f * ShooterGame.SCALE;
 
     public MeleeEnemy(float frameDuration, float hp, float exp, TextureAtlas atlas, String animationName, Texture bulletTexture, Vector2 spawnPos) {
         super(frameDuration, hp, exp, new NoWeapon(), atlas, animationName, bulletTexture, spawnPos);

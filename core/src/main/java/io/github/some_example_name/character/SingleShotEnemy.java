@@ -8,7 +8,7 @@ import io.github.some_example_name.weapon.SingleShotWeapon;
 import io.github.some_example_name.weapon.Weapon;
 
 public class SingleShotEnemy extends Enemy{
-    private float moveSpeed = .6f;
+    private float moveSpeed = .6f * ShooterGame.SCALE;
     private int directionIndex = 0; // 0 = down, 1 = left, 2 = up, 3 = right
 
     private static final Vector2[] DIRECTIONS = {
@@ -46,7 +46,7 @@ public class SingleShotEnemy extends Enemy{
                 if (x <= 0f) directionIndex = 2; // up
                 break;
             case 2: // up
-                if (y + height >= ShooterGame.VIRTUAL_HEIGHT - .65f) directionIndex = 3; // right
+                if (y + height >= ShooterGame.VIRTUAL_HEIGHT - (.65f * ShooterGame.SCALE)) directionIndex = 3; // right
                 break;
             case 3: // right
                 if (x + width >= ShooterGame.VIRTUAL_WIDTH) directionIndex = 0; // down

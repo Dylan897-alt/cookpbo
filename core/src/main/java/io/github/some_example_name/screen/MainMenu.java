@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.some_example_name.ShooterGame;
 
 public class MainMenu implements Screen {
-    public static final float PPU = 48f;
     final ShooterGame game;
 
     BitmapFont font;
@@ -73,7 +72,7 @@ public class MainMenu implements Screen {
         batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 
         // Draw "Press Space" text
-        font.draw(batch, "Press [Space] to start", 2f, 1f);
+        font.draw(batch, "Press [Space] to start", (2f * ShooterGame.SCALE), (1f * ShooterGame.SCALE));
         batch.end();
     }
 

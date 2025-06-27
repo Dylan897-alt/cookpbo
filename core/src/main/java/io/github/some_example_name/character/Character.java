@@ -78,7 +78,7 @@ public abstract class Character implements Collidable, Damageable {
     }
 
     public void setDamage(float value){
-        this.damage = damage;
+        this.damage = value;
     }
 
 
