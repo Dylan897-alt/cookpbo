@@ -42,7 +42,7 @@ public class BulletManager implements BulletSpawner{
                 continue;
             }
 
-            if (y > ShooterGame.VIRTUAL_HEIGHT - 1f && vy >= 0) {
+            if (y > ShooterGame.VIRTUAL_HEIGHT - (1f*ShooterGame.SCALE) && vy >= 0) {
                 bullets.remove(i);
                 continue;
             }

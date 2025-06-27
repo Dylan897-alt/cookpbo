@@ -24,14 +24,13 @@ import io.github.some_example_name.object.BulletManager;
 import io.github.some_example_name.utils.FrameHandler;
 import org.w3c.dom.Text;
 
-import java.util.ArrayList;
+import java.util.ArrayList;// ... (kode impor tetap sama)
 
 public class Stage1 implements Screen {
     final ShooterGame game;
-    private boolean isGameOver = false; //untuk ngecek dia gameover/ga
+    private boolean isGameOver = false;
     private BitmapFont font;
     private Animation<TextureRegion> deathAnimation;
-
 
     Player player;
     Crosshair crosshair;
@@ -44,7 +43,8 @@ public class Stage1 implements Screen {
     FitViewport viewport;
     SpriteBatch batch;
 
-    Texture background; // Background
+    Texture background;
+    Texture levelButton; // ✅ Tambahkan ini
     Music bgMusic;
 
     private static class ActiveAnimation {
@@ -58,7 +58,6 @@ public class Stage1 implements Screen {
     }
     private ArrayList<ActiveAnimation> activeExplosions = new ArrayList<>();
 
-
     public Stage1(final ShooterGame game) {
         this.game = game;
         this.batch = new SpriteBatch();
@@ -66,7 +65,7 @@ public class Stage1 implements Screen {
         camera.setToOrtho(false);
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
-        this.background = new Texture("backgroundstage1.png"); // Load background
+        this.background = new Texture("backgroundstage1.png");
         this.player = new Player(10, 0, new Texture("tes1.png"), new Texture("bullet3.png"));
         this.playerController = new PlayerController(player, viewport);
 
@@ -74,8 +73,7 @@ public class Stage1 implements Screen {
         this.bulletManager = new BulletManager();
         this.enemyManager = new EnemyManager(player);
         enemyManager.setListener((enemy) -> {
-            player.addExp(enemy.getExp()); // or score += ...
-            //sound.playExplosion(); // optional
+            player.addExp(enemy.getExp());
             playDeathAnimation(enemy.getCenter());
         });
 
@@ -88,7 +86,7 @@ public class Stage1 implements Screen {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Kenney Future.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 32; // Adjust based on your world scale
+        parameter.size = 32;
         parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
         parameter.minFilter = Texture.TextureFilter.Linear;
         parameter.magFilter = Texture.TextureFilter.Linear;
@@ -105,12 +103,14 @@ public class Stage1 implements Screen {
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
         bgMusic.play();
+
+        // ✅ Load gambar tombol
+        this.levelButton = new Texture("levelhexagon.png");
     }
 
     @Override
     public void render(float delta) {
         if (isGameOver) {
-            // Jika game-over, pindah ke layar GameOver
             game.setScreen(new GameOver(game));
             return;
         }
@@ -122,9 +122,8 @@ public class Stage1 implements Screen {
         enemyManager.updateEnemies(delta, bulletManager, player);
         collisionManager.handleAllCollisions(player, bulletManager, enemyManager);
 
-        // Pengecekan Game-Over berdasarkan kondisi kesehatan pemain
         if (player.getHp() <= 0) {
-            isGameOver = true;  // Menandakan bahwa permainan selesai
+            isGameOver = true;
         }
 
         for (int i = activeExplosions.size() - 1; i >= 0; i--) {
@@ -146,10 +145,21 @@ public class Stage1 implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT); // Draw background
-        font.draw(batch, "EXP: " + (int)player.getExp() + "/" + (int)player.getExpToNextLevel(), (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
-        font.draw(batch, "LVL: " + (int)player.getLevel(), (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
-        player.draw(batch); // your existing draw call
+        batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
+
+        font.draw(batch, "EXP: " + (int)player.getExp() + "/" + (int)player.getExpToNextLevel(),
+            (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
+        font.draw(batch, "LVL: " + (int)player.getLevel(),
+            (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.2f * ShooterGame.SCALE));
+
+        // ✅ Gambar tombol di kanan atas, tinggi setara teks
+        float buttonHeight = 0.8f * ShooterGame.SCALE;
+        float aspectRatio = (float) levelButton.getWidth() / levelButton.getHeight();
+        float buttonWidth = buttonHeight * aspectRatio;
+        float x = ShooterGame.VIRTUAL_WIDTH - buttonWidth - (0.2f * ShooterGame.SCALE);
+        float y = ShooterGame.VIRTUAL_HEIGHT - buttonHeight;
+
+        batch.draw(levelButton, x, y, buttonWidth, buttonHeight);
 
         player.draw(batch);
         bulletManager.drawAll(batch);
@@ -158,7 +168,7 @@ public class Stage1 implements Screen {
 
         for (ActiveAnimation anim : activeExplosions) {
             TextureRegion frame = deathAnimation.getKeyFrame(anim.stateTime);
-            float size = 1f * ShooterGame.SCALE; // adjust for proper scale
+            float size = 1f * ShooterGame.SCALE;
             batch.draw(frame, anim.position.x - size / 2, anim.position.y - size / 2, size, size);
         }
 
@@ -182,8 +192,11 @@ public class Stage1 implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        background.dispose(); // Dispose background
+        background.dispose();
         bgMusic.stop();
         bgMusic.dispose();
+
+        // ✅ Dispose gambar tombol
+        levelButton.dispose();
     }
 }
