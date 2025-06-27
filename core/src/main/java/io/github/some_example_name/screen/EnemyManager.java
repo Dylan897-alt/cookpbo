@@ -29,7 +29,7 @@ public class EnemyManager {
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 10, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_single_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage1_melee.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
     }
 
     public void setListener(EnemyDeathListener listener){
