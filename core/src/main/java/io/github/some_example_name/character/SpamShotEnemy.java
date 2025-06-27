@@ -49,7 +49,7 @@ public class SpamShotEnemy extends Enemy {
         float maxX = ShooterGame.VIRTUAL_WIDTH - spriteWidth;
 
         float minY = 0f;
-        float maxY = ShooterGame.VIRTUAL_HEIGHT - 1f - spriteHeight;
+        float maxY = ShooterGame.VIRTUAL_HEIGHT - .65f - spriteHeight;
 
         float x = MathUtils.random(minX, maxX);
         float y = MathUtils.random(minY, maxY);

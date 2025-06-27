@@ -1,8 +1,10 @@
 package io.github.some_example_name.weapon;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import io.github.some_example_name.Damageable;
 import io.github.some_example_name.object.BulletOwner;
 import io.github.some_example_name.object.BulletSpawner;
 
@@ -17,6 +19,7 @@ public class SpamShotWeapon extends Weapon {
 
     public SpamShotWeapon(float dummyCooldown) {
         super(dummyCooldown); // cooldown bawaan ga dipakai, pakai logika sendiri
+        this.shootSound = Gdx.audio.newSound(Gdx.files.internal("spam-shot.mp3"));
     }
 
     @Override
@@ -41,16 +44,17 @@ public class SpamShotWeapon extends Weapon {
     }
 
     @Override
-    public void fire(Texture bulletTexture, Vector2 origin, Vector2 directionIgnored, BulletSpawner spawner, BulletOwner owner) {
+    public void fire(Texture bulletTexture, Vector2 origin, Vector2 directionIgnored, BulletSpawner spawner, BulletOwner ownerType, Damageable ownerEntity) {
         if (!isFiring && canFire()) {
             this.spawner = spawner;
             this.bulletTexture = bulletTexture;
             this.origin = origin;
-            this.owner = owner;
+            this.ownerType = ownerType;
 
             isFiring = true;
             shotsFired = 0;
             shotTimer = 0f; // langsung tembak peluru pertama
+            shootSound.play(0.2f);
         }
     }
 
@@ -58,11 +62,12 @@ public class SpamShotWeapon extends Weapon {
     private BulletSpawner spawner;
     private Texture bulletTexture;
     private Vector2 origin;
-    private BulletOwner owner;
+    private BulletOwner ownerType;
+    private Damageable ownerEntity;
 
     private void fireRandom() {
         float angle = MathUtils.random(0f, 360f);
         Vector2 dir = new Vector2(1, 0).setAngleDeg(angle);
-        spawner.spawnBullet(bulletTexture, origin.cpy(), dir, owner, speedModifier);
+        spawner.spawnBullet(bulletTexture, origin.cpy(), dir, ownerType, ownerEntity, speedModifier);
     }
 }

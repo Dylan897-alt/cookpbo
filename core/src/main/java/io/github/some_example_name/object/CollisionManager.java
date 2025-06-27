@@ -1,14 +1,11 @@
 package io.github.some_example_name.object;
 
-import io.github.some_example_name.Collidable;
-import io.github.some_example_name.Damageable;
 import io.github.some_example_name.character.Enemy;
 import io.github.some_example_name.character.Player;
 import io.github.some_example_name.screen.EnemyManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class CollisionManager {
     public void handleAllCollisions(Player player, BulletManager bulletManager, EnemyManager enemyManager) {
@@ -24,17 +21,17 @@ public class CollisionManager {
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
 
-            if (bullet.getOwner() == BulletOwner.PLAYER) {
+            if (bullet.getOwnerType() == BulletOwner.PLAYER) {
                 for (Enemy enemy : enemies) {
                     if (bullet.getHitbox().overlaps(enemy.getHitbox())) {
-                        enemy.takeDamage(1); // adjust damage as needed
+                        enemy.takeDamage(bullet.getOwnerEntity().getDamage());
                         bulletIterator.remove();
                         break;
                     }
                 }
-            } else if (bullet.getOwner() == BulletOwner.ENEMY) {
+            } else if (bullet.getOwnerType() == BulletOwner.ENEMY) {
                 if (bullet.getHitbox().overlaps(player.getHitbox())) {
-                    player.takeDamage(1); // adjust damage as needed
+                    player.takeDamage(bullet.getOwnerEntity().getDamage());
                     bulletIterator.remove();
                 }
             }
@@ -44,7 +41,7 @@ public class CollisionManager {
     private void checkPlayerEnemyCollision(Player player, ArrayList<Enemy> enemies) {
         for (Enemy enemy : enemies) {
             if (player.getHitbox().overlaps(enemy.getHitbox())) {
-                player.takeDamage(1); // adjust damage as needed
+                player.takeDamage(enemy.getDamage());
             }
         }
     }
