@@ -24,6 +24,9 @@ public class CollisionManager {
             if (bullet.getOwnerType() == BulletOwner.PLAYER) {
                 for (Enemy enemy : enemies) {
                     if (bullet.getHitbox().overlaps(enemy.getHitbox())) {
+                        if(bullet.getOwnerEntity() == null){
+                            continue;
+                        }
                         enemy.takeDamage(bullet.getOwnerEntity().getDamage());
                         bulletIterator.remove();
                         break;
@@ -31,6 +34,9 @@ public class CollisionManager {
                 }
             } else if (bullet.getOwnerType() == BulletOwner.ENEMY) {
                 if (bullet.getHitbox().overlaps(player.getHitbox())) {
+                    if(bullet.getOwnerEntity() == null){
+                        continue;
+                    }
                     player.takeDamage(bullet.getOwnerEntity().getDamage());
                     bulletIterator.remove();
                 }
