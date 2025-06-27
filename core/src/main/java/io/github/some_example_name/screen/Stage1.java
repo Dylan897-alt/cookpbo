@@ -114,11 +114,14 @@ public class Stage1 implements Screen {
     @Override
     public void render(float delta) {
         if (isGameOver) {
+            dispose();
             game.setScreen(new GameOver(game));
             return;
         }
         if (isStageCleared && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            dispose();
             game.setScreen(new Stage2(game, this.player));
+            return;
         }
         if (!bgMusic.isPlaying() && !isStageCleared) {
             isStageCleared = true;
@@ -217,8 +220,7 @@ public class Stage1 implements Screen {
         background.dispose();
         bgMusic.stop();
         bgMusic.dispose();
-
-        // ✅ Dispose gambar tombol
         levelButton.dispose();
+        font.dispose();
     }
 }

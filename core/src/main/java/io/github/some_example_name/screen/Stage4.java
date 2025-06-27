@@ -28,7 +28,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;// ... (kode impor tetap sama)
 
-public class Stage2 implements Screen {
+public class Stage4 implements Screen {
     final ShooterGame game;
     private boolean isGameOver = false;
     private boolean isStageCleared = false;
@@ -61,14 +61,14 @@ public class Stage2 implements Screen {
     }
     private ArrayList<ActiveAnimation> activeExplosions = new ArrayList<>();
 
-    public Stage2(final ShooterGame game, Player player) {
+    public Stage4(final ShooterGame game, Player player) {
         this.game = game;
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
         camera.setToOrtho(false);
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
-        this.background = new Texture("backgroundstage2.png");
+        this.background = new Texture("backgroundstage4.png");
         this.player = player;
         this.playerController = new PlayerController(player, viewport);
 
@@ -102,7 +102,7 @@ public class Stage2 implements Screen {
             new Texture("enemy-explosion.png"), 80, 80, .1f, false
         );
 
-        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("12. Physical Challenge (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
+        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("27. Its TV Time! (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
         bgMusic.play();
@@ -120,8 +120,8 @@ public class Stage2 implements Screen {
         }
         if (isStageCleared && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             dispose();
-            game.setScreen(new Stage3(game, this.player));
             return;
+//            game.setScreen(new Stage4(game, this.player));
         }
         if (!bgMusic.isPlaying() && !isStageCleared) {
             isStageCleared = true;
@@ -223,3 +223,5 @@ public class Stage2 implements Screen {
         font.dispose();
     }
 }
+
+
