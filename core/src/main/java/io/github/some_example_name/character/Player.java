@@ -4,8 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import io.github.some_example_name.ShooterGame;
 import io.github.some_example_name.object.Bullet;
 import io.github.some_example_name.object.BulletOwner;
 import io.github.some_example_name.utils.FrameHandler;
@@ -16,6 +18,10 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class Player extends Character {
+    private int level = 1;
+    private float expToNextLevel = 10f;
+    private final ArrayList<Upgrade> upgrades = new ArrayList<>();
+
     private Animation<TextureRegion> walkRightAnim;
     private Animation<TextureRegion> walkLeftAnim;
     private Animation<TextureRegion> walkUpAnim;
@@ -29,7 +35,6 @@ public class Player extends Character {
 
     public Player(float hp, float exp, Texture spriteSheet, Texture bulletTexture) {
         super(new Sprite(), hp, exp);
-        sprite.setSize(1f, 1f);
         float frameDuration = 0.1f;
 
         int frameCols = 8;
@@ -44,8 +49,16 @@ public class Player extends Character {
         walkDownAnim = FrameHandler.createAnimation(spriteSheet, frameWidth, frameHeight, frameDuration, 3, true);
         walkUpAnim = FrameHandler.createAnimation(spriteSheet, frameWidth, frameHeight, frameDuration, 2, true);
 
+        TextureRegion firstFrame = walkDownAnim.getKeyFrame(0);
+
         setCurrentAnimation(walkDownAnim);
         sprite.setRegion(currentAnimation.getKeyFrame(0));
+
+
+        float displayHeight = .6f;
+        float aspectRatio = (float) firstFrame.getRegionWidth() / firstFrame.getRegionHeight();
+        float displayWidth = displayHeight * aspectRatio;
+        sprite.setSize(displayWidth, displayHeight);
 
         this.bulletTexture = bulletTexture;
         this.weapon = new SingleShotWeapon(.8f, 1.5f);
@@ -62,6 +75,10 @@ public class Player extends Character {
 
     public void move(Vector2 delta) {
         sprite.translate(delta.x, delta.y);
+        float clampedX = MathUtils.clamp(sprite.getX(), 0, ShooterGame.VIRTUAL_WIDTH - sprite.getWidth());
+        float clampedY = MathUtils.clamp(sprite.getY(), 0, ShooterGame.VIRTUAL_HEIGHT - .65f - sprite.getHeight());
+
+        sprite.setPosition(clampedX, clampedY);
     }
 
     @Override
@@ -121,4 +138,31 @@ public class Player extends Character {
             sprite.draw(batch); // flashes while invincible
         }
     }
+
+    public void addExp(float value){
+        setExp(getExp() + value);
+        while (getExp() >= expToNextLevel) {
+            levelUp();
+        }
+    }
+
+    public float getLevel(){
+        return level;
+    }
+
+    private void levelUp() {
+        level++;
+        float excess = getExp() - expToNextLevel;
+        expToNextLevel *= 1.5f;
+        setExp(excess);
+
+        if (level <= 10 && level - 1 < upgrades.size()) {
+            upgrades.get(level - 1).apply(this);
+            System.out.println("Level " + level + " upgrade: " + upgrades.get(level - 1).getDescription());
+        } else {
+            new IncreaseDamage().apply(this);
+            System.out.println("Level " + level + ": Permanent damage increase");
+        }
+    }
+
 }

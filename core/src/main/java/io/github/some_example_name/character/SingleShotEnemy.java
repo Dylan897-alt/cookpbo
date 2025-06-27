@@ -19,7 +19,7 @@ public class SingleShotEnemy extends Enemy{
     };
 
     public SingleShotEnemy(float frameDuration, float hp, float exp, TextureAtlas atlas, String animationName, Texture bulletTexture, Vector2 spawnPos) {
-        super(frameDuration, hp, exp, new SingleShotWeapon(1.2f), atlas, animationName, bulletTexture, spawnPos);
+        super(frameDuration, hp, exp, new SingleShotWeapon(1.5f), atlas, animationName, bulletTexture, spawnPos);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SingleShotEnemy extends Enemy{
                 if (x <= 0f) directionIndex = 2; // up
                 break;
             case 2: // up
-                if (y + height >= ShooterGame.VIRTUAL_HEIGHT - 1f) directionIndex = 3; // right
+                if (y + height >= ShooterGame.VIRTUAL_HEIGHT - .65f) directionIndex = 3; // right
                 break;
             case 3: // right
                 if (x + width >= ShooterGame.VIRTUAL_WIDTH) directionIndex = 0; // down
