@@ -25,19 +25,22 @@ public class EnemyManager {
     public EnemyManager(Player player){
         this.player = player;
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 5, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 5, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 //        templateStage1.add(new EnemyTemplate(.1f, 3, 10, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage4_five.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_single_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
     }
 
     public void setListener(EnemyDeathListener listener){
         this.listener = listener;
     }
 
-    public void handleSpawnStage1(float delta){
-        if (totalSpawneds1 >= MAX_SPAWNs1) return; //
+    public void handleSpawnStage1(float delta, boolean isStageCleared){
+        if (isStageCleared){
+            enemies.clear();
+            return;
+        }
 
         cooldown -= delta;
 
