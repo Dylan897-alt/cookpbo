@@ -19,19 +19,24 @@ public class EnemyManager {
     private ArrayList<EnemyTemplate> templateStage2 = new ArrayList<>();
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private Random random = new Random(); //pake cara lain gpp
-    private float cooldown = 1f;
+    private float cooldown = 3f;
     private int totalSpawneds1 = 0;//batas spawn
     private final int MAX_SPAWNs1 = 20;
     private final Player player;
+    private EnemyDeathListener listener;
 
     public EnemyManager(Player player){
         this.player = player;
-        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 1, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 6, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 10, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 6, "stage4_five.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+    }
+
+    public void setListener(EnemyDeathListener listener){
+        this.listener = listener;
     }
 
     public void handleSpawnStage1(float delta){
@@ -70,7 +75,7 @@ public class EnemyManager {
 
             Vector2 spawnPos = new Vector2(x, y);
             spawnEnemy(spawnPos);
-            totalSpawneds1++;
+            //totalSpawneds1++;
         }
     }
 
@@ -94,15 +99,15 @@ public class EnemyManager {
     }
 
     public void updateEnemies(float delta, BulletManager bulletManager, Player player){
-        Iterator<Enemy> iterator = enemies.iterator();
-        while (iterator.hasNext()) {
-            Enemy enemy = iterator.next();
+        for(int i = enemies.size() -1; i >= 0; i--){
+            Enemy enemy = enemies.get(i);
             enemy.update(delta);
             enemy.updateWeapon(delta, bulletManager, player);
 
             if (!enemy.isAlive()) {
+                listener.onEnemyDied(enemy);
                 // Optional: play explosion animation, sound, or grant EXP
-                iterator.remove();
+                enemies.remove(i);
             }
         }
     }

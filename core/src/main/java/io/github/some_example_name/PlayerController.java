@@ -22,7 +22,16 @@ public class PlayerController {
 
     public void handleInput(float delta, BulletSpawner spawner) {
         Vector2 moveDelta = new Vector2();
-        float speed = 2f;
+        float baseSpeed = 3f;
+        float focusSpeed = 1.5f;
+        float speed;
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            speed = focusSpeed;
+        } else{
+            speed = baseSpeed;
+        }
+
 
         boolean isMoving = false;
 
@@ -62,7 +71,7 @@ public class PlayerController {
                 viewport.unproject(touchPos);
                 Vector2 direction = new Vector2(touchPos).sub(origin);
 
-                player.getWeapon().fire(player.getBulletTexture(), origin, direction, spawner, BulletOwner.PLAYER);
+                player.getWeapon().fire(player.getBulletTexture(), origin, direction, spawner, BulletOwner.PLAYER, player);
             }
         }
     }

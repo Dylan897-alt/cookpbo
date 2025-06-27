@@ -18,6 +18,7 @@ public class Enemy extends Character {
     private Texture bulletTexture;
     private TextureAtlas atlas;
 
+
     public Enemy(float frameDuration, float hp, float exp, Weapon weapon, TextureAtlas atlas, String animationName, Texture bulletTexture, Vector2 spawnPos) {
         super(new Sprite(), hp, exp);
         this.atlas = atlas;
@@ -50,7 +51,7 @@ public class Enemy extends Character {
         if(weapon.canFire()){
             Vector2 origin = getCenter();
             Vector2 direction = new Vector2(player.getCenter()).sub(origin);
-            weapon.fire(bulletTexture, origin, direction, spawner, BulletOwner.ENEMY);
+            weapon.fire(bulletTexture, origin, direction, spawner, BulletOwner.ENEMY, this);
         }
     }
 
