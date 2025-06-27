@@ -29,6 +29,7 @@ import java.util.ArrayList;// ... (kode impor tetap sama)
 public class Stage1 implements Screen {
     final ShooterGame game;
     private boolean isGameOver = false;
+    private boolean isStageCleared = false;
     private BitmapFont font;
     private Animation<TextureRegion> deathAnimation;
 
@@ -114,11 +115,16 @@ public class Stage1 implements Screen {
             game.setScreen(new GameOver(game));
             return;
         }
+        if (!bgMusic.isPlaying() && !isStageCleared) {
+            isStageCleared = true;
+            System.out.println("Stage Cleared!");
+        }
+
         playerController.handleInput(delta, bulletManager);
         player.update(delta);
         crosshair.update(delta);
         bulletManager.updateBullets(delta);
-        enemyManager.handleSpawnStage1(delta);
+        enemyManager.handleSpawnStage1(delta, isStageCleared);
         enemyManager.updateEnemies(delta, bulletManager, player);
         collisionManager.handleAllCollisions(player, bulletManager, enemyManager);
 
