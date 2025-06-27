@@ -3,19 +3,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import io.github.some_example_name.Collidable;
-import io.github.some_example_name.Damageable;
+import io.github.some_example_name.character.Character;
 
 public class Bullet extends GameObject implements Collidable { //pindah ke package object, terus ganti extend GameObject
     private Vector2 startPos;
     private Vector2 velocity;
-    private BulletOwner ownerType;
-    private Damageable ownerEntity;
+    private BulletOwner owner;
     private float speed = 2f;
 
-    public Bullet(Texture texture, Vector2 startPos, Vector2 direction, BulletOwner ownerType, Damageable ownerEntity, float speedModifier){
+    public Bullet(Texture texture, Vector2 startPos, Vector2 direction, BulletOwner owner, float speedModifier){
         super(new Sprite(texture));
-        this.ownerType = ownerType;
-        this.ownerEntity = ownerEntity;
+        this.owner = owner;
         this.speed *= speedModifier;
         this.startPos = new Vector2(startPos);
         this.velocity = new Vector2(direction).set(direction.nor().scl(speed));
@@ -49,11 +47,7 @@ public class Bullet extends GameObject implements Collidable { //pindah ke packa
     }
 
 
-    public BulletOwner getOwnerType(){
-        return ownerType;
-    }
-
-    public Damageable getOwnerEntity(){
-        return ownerEntity;
+    public BulletOwner getOwner(){
+        return owner;
     }
 }

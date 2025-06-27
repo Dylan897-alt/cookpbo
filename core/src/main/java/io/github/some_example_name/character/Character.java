@@ -11,7 +11,6 @@ public abstract class Character implements Collidable, Damageable {
     protected Sprite sprite;
     private float hp;
     private float exp;
-    private float damage;
 
     @Override
     public Rectangle getHitbox(){
@@ -31,7 +30,6 @@ public abstract class Character implements Collidable, Damageable {
         this.sprite = sprite;
         this.hp = hp;
         this.exp = exp;
-        this.damage = 1;
     }
 
     public void draw(SpriteBatch batch) {
@@ -62,28 +60,6 @@ public abstract class Character implements Collidable, Damageable {
         return hp;
     }
 
-    public void setHp(float value) {
-        this.hp = value;
-    }
-
-    public float getExp(){
-        return exp;
-    }
-    public void setExp(float value) {
-        this.exp = value;
-    }
-
-    public float getDamage(){
-        return damage;
-    }
-
-    public void setDamage(float value){
-        this.damage = damage;
-    }
-
-
     public abstract void update(float delta);
-
-
 }
 

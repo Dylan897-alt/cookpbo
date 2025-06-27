@@ -46,7 +46,7 @@ public class FiveShotEnemy extends Enemy {
                 if (x <= 0f) directionIndex = 2; // up
                 break;
             case 2: // up
-                if (y + height >= ShooterGame.VIRTUAL_HEIGHT - .65f) directionIndex = 3; // right
+                if (y + height >= ShooterGame.VIRTUAL_HEIGHT - 1f) directionIndex = 3; // right
                 break;
             case 3: // right
                 if (x + width >= ShooterGame.VIRTUAL_WIDTH) directionIndex = 0; // down

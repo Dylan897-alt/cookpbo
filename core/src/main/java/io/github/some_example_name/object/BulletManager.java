@@ -3,7 +3,6 @@ package io.github.some_example_name.object;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import io.github.some_example_name.Damageable;
 import io.github.some_example_name.ShooterGame;
 
 import java.util.ArrayList;
@@ -12,8 +11,8 @@ public class BulletManager implements BulletSpawner{
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
     @Override
-    public void spawnBullet(Texture texture, Vector2 origin, Vector2 target, BulletOwner ownerType, Damageable ownerEntity, float speedModifier){
-        bullets.add(new Bullet(texture, origin, target, ownerType, ownerEntity, speedModifier));
+    public void spawnBullet(Texture texture, Vector2 origin, Vector2 target, BulletOwner owner, float speedModifier){
+        bullets.add(new Bullet(texture, origin, target, owner, speedModifier));
     }
 
     public void updateBullets(float delta){
@@ -22,7 +21,7 @@ public class BulletManager implements BulletSpawner{
             bullet.update(delta);
 
 //            // Batasi peluru dari enemy tidak keluar batas atas/bawah
-//            if (bullet.getOwnerType() == BulletOwner.ENEMY) {
+//            if (bullet.getOwner() == BulletOwner.ENEMY) {
 //                float y = bullet.getY();
 //                float vy = bullet.getVelocity().y;
 //
