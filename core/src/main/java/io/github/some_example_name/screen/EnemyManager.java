@@ -84,6 +84,14 @@ public class EnemyManager {
 
     }
 
+    public void handleSpawnStage3(float delta){
+
+    }
+
+    public void handleSpawnStage4(float delta){
+
+    }
+
     public void drawAll(SpriteBatch batch){
         for(Enemy enemy: enemies){
             enemy.draw(batch);

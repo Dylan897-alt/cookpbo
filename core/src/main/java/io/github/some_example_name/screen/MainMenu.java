@@ -72,7 +72,6 @@ public class MainMenu implements Screen {
         batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 
         // Draw "Press Space" text
-        font.draw(batch, "Press [Space] to start", (2f * ShooterGame.SCALE), (1f * ShooterGame.SCALE));
         batch.end();
     }
 
