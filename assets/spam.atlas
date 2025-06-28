@@ -1,4 +1,4 @@
-stage3_spam.png
+spam.png
 size:2048,2048
 repeat:none
 0_Monster_Fly
@@ -38,7 +38,7 @@ bounds:1070,459,532,455
 index:7
 bounds:1070,2,532,455
 
-stage3_spam2.png
+spam2.png
 size:2048,1024
 repeat:none
 0_Monster_Fly

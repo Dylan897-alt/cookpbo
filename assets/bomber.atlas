@@ -1,4 +1,4 @@
-stage2_spam.png
+bomber.png
 size:2048,2048
 repeat:none
 0_Monster_Fly
@@ -29,7 +29,7 @@ bounds:1144,541,569,537
 index:10
 bounds:1144,2,569,537
 
-stage2_spam2.png
+bomber2.png
 size:2048,2048
 repeat:none
 0_Monster_Fly
