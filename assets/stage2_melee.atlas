@@ -1,4 +1,4 @@
-stage2_single_shot.png
+stage2_melee.png
 size:2048,2048
 repeat:none
 0_Monster_Fly
@@ -47,7 +47,7 @@ bounds:1062,346,528,342
 index:17
 bounds:1062,2,528,342
 
-stage2_single_shot2.png
+stage2_melee2.png
 size:2048,512
 repeat:none
 0_Monster_Fly

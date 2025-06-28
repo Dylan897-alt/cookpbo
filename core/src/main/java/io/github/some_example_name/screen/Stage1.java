@@ -48,6 +48,7 @@ public class Stage1 implements Screen {
 
     Texture background;
     Texture levelButton; // ✅ Tambahkan ini
+//    Texture heart;
     Music bgMusic;
 
     private static class ActiveAnimation {
@@ -69,6 +70,7 @@ public class Stage1 implements Screen {
         this.viewport = new FitViewport(game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT, camera);
 
         this.background = new Texture("backgroundstage1.png");
+//        this.heart= new Texture(".png");
         this.player = new Player(10, 0, new Texture("tes1.png"), new Texture("bullet3.png"));
         this.playerController = new PlayerController(player, viewport);
 
@@ -161,12 +163,16 @@ public class Stage1 implements Screen {
 
         batch.begin();
         batch.draw(background, 0, 0, game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
+//        batch.draw(heart,10,2,game.VIRTUAL_WIDTH, game.VIRTUAL_HEIGHT);
 
         font.getData().setScale(0.007f * ShooterGame.SCALE);
         font.draw(batch, "EXP: " + (int)player.getExp() + " / " + (int)player.getExpToNextLevel(),
             (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
         font.draw(batch, "LVL: " + (int)player.getLevel(),
             (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
+        font.draw(batch, "HP: " + (int)player.getHp(),
+            (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.3f * ShooterGame.SCALE));
+
         if (isStageCleared) {
             font.getData().setScale(0.02f * ShooterGame.SCALE);
 

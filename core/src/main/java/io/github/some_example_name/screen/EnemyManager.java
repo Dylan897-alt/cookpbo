@@ -14,6 +14,8 @@ import java.util.Random;
 public class EnemyManager {
     private ArrayList<EnemyTemplate> templateStage1 = new ArrayList<>();
     private ArrayList<EnemyTemplate> templateStage2 = new ArrayList<>();
+    private ArrayList<EnemyTemplate> templateStage3 = new ArrayList<>();
+    private ArrayList<EnemyTemplate> templateStage4 = new ArrayList<>();
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private Random random = new Random(); //pake cara lain gpp
     private float cooldown = 3f;
@@ -24,12 +26,35 @@ public class EnemyManager {
 
     public EnemyManager(Player player){
         this.player = player;
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 3, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 5, 5, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 4, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-//        templateStage1.add(new EnemyTemplate(.1f, 3, 10, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage1_melee.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 5, "bomber.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 5, 2, "triple.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 3, "spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 10, 1, "single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+//        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+
+
+        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 1, "single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 2, "triple.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+
+        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 1, "stage2_single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 2, "stage2_triple_shot.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
+        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 3, "spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+
+        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 1, "stage3_single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 2, "stage3_triple.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 3, "stage3_spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 4, "stage3_five.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 6, "stage3_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+
+        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 2, "stage4_triple.atlas", "0_Monster_Jump", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 3, "stage4_spam.atlas", "0_Monster_Jump", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 4, "stage4_five.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 5, "stage4_bomb.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
     }
 
     public void setListener(EnemyDeathListener listener){
@@ -106,7 +131,6 @@ public class EnemyManager {
 
             if (!enemy.isAlive()) {
                 listener.onEnemyDied(enemy);
-                // Optional: play explosion animation, sound, or grant EXP
                 enemies.remove(i);
             }
         }
