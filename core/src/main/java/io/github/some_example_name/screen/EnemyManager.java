@@ -27,27 +27,27 @@ public class EnemyManager {
     public EnemyManager(Player player){
         this.player = player;
 
-        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 1, "single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 2, "triple.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
-        templateStage1.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 2, 1, "single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 3, 2, "triple.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
+        templateStage1.add(new EnemyTemplate(.1f, 3, 1, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 
-        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 1, "stage2_single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 3, "spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage2.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage2.add(new EnemyTemplate(.1f, 6, 3, 1, "stage2_single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage2.add(new EnemyTemplate(.1f, 6, 5, 2, "stage2_triple_shot.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage2.add(new EnemyTemplate(.1f, 6, 4, 3, "spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage2.add(new EnemyTemplate(.1f, 6, 2, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 
-        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 1, "single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 2, "stage3_triple.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 3, "spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 4, "Stage3_five.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
-        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 6, 8, 1, "single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 6, 10, 2, "stage3_triple.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 6, 9, 3, "spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 6, 11, 4, "stage3_five.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 6, 7, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 
-        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
-        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 2, "stage4_triple.atlas", "0_Monster_Jump", new Texture("bullet1.png")));
-        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 3, "stage4_spam.atlas", "0_Monster_Jump", new Texture("bullet1.png")));
-        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 4, "stage4_five.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
-        templateStage4.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage4Special.add(new EnemyTemplate(.1f, 3, 50, 5, "stage4_bomb.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 8, 16, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 8, 20, 2, "stage4_triple.atlas", "0_Monster_Jump", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 8, 18, 3, "stage4_spam.atlas", "0_Monster_Jump", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 8, 22, 4, "stage3_five.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage4.add(new EnemyTemplate(.1f, 8, 14, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage4Special.add(new EnemyTemplate(.1f, 6, 50, 5, "stage4_bomb.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
     }
 
     public void setListener(EnemyDeathListener listener){
@@ -150,7 +150,7 @@ public class EnemyManager {
         cooldown -= delta;
 
         if (cooldown <= 0) {
-            cooldown = 1.5f + random.nextFloat() * 2f;
+            cooldown = 2f + random.nextFloat() * 2f;
 
             for (int i = 0; i < 2; i++) {
                 float enemyWidth = 0.8f * ShooterGame.SCALE;
@@ -226,7 +226,7 @@ public class EnemyManager {
         }
 
         if (cooldown <= 0) {
-            cooldown = 1.5f + random.nextFloat() * 2f;
+            cooldown = 1.8f + random.nextFloat() * 2f;
 
             for (int i = 0; i < 3; i++) {
                 float enemyWidth = 0.8f * ShooterGame.SCALE;

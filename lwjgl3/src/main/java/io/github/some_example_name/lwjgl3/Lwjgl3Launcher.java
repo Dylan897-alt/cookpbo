@@ -3,7 +3,7 @@ package io.github.some_example_name.lwjgl3;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import io.github.some_example_name.ShooterGame;
-/** Launches the desktop (LWJGL3) application. */
+/** Launches the desktop (LWJGL3) application.as */
 public class Lwjgl3Launcher {
     public static void main(String[] args) {
         if (StartupHelper.startNewJvmIfRequired()) return; // This handles macOS support and helps on Windows.

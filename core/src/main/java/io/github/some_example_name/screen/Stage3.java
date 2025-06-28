@@ -47,7 +47,6 @@ public class Stage3 implements Screen {
     SpriteBatch batch;
 
     Texture background;
-    Texture levelButton; // ✅ Tambahkan ini
     Music bgMusic;
 
     private static class ActiveAnimation {
@@ -78,6 +77,10 @@ public class Stage3 implements Screen {
         enemyManager.setListener((enemy) -> {
             player.addExp(enemy.getExp());
             playDeathAnimation(enemy.getCenter());
+            ShooterGame.enemiesKilled += 1;
+            if(ShooterGame.enemiesKilled % 10 == 0){
+                player.heal(1);
+            }
         });
 
         this.collisionManager = new CollisionManager();
@@ -101,15 +104,12 @@ public class Stage3 implements Screen {
         this.deathAnimation = FrameHandler.createAnimation(
             new Texture("enemy-explosion.png"), 80, 80, .1f, false
         );
-        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("gun-shot.mp3"));
+//        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("gun-shot.mp3"));
 
-//        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("26. TV WORLD (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
+        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("26. TV WORLD (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
         bgMusic.play();
-
-        // ✅ Load gambar tombol
-        this.levelButton = new Texture("levelhexagon.png");
     }
 
     @Override
@@ -167,6 +167,11 @@ public class Stage3 implements Screen {
             (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
         font.draw(batch, "LVL: " + (int)player.getLevel(),
             (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
+        font.draw(batch, "HP: " + (int)player.getHp(),
+            (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.4f * ShooterGame.SCALE));
+        font.draw(batch, "KILL: " + ShooterGame.enemiesKilled,
+            (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.4f * ShooterGame.SCALE));
+
         if (isStageCleared) {
             font.getData().setScale(0.02f * ShooterGame.SCALE);
 
@@ -175,16 +180,6 @@ public class Stage3 implements Screen {
 
             font.draw(batch, "Stage Cleared\nPress Space to Continue", textX, textY,0, Align.center, false);
         }
-
-
-        // ✅ Gambar tombol di kanan atas, tinggi setara teks
-        float buttonHeight = 0.8f * ShooterGame.SCALE;
-        float aspectRatio = (float) levelButton.getWidth() / levelButton.getHeight();
-        float buttonWidth = buttonHeight * aspectRatio;
-        float x = ShooterGame.VIRTUAL_WIDTH - buttonWidth - (0.2f * ShooterGame.SCALE);
-        float y = ShooterGame.VIRTUAL_HEIGHT - buttonHeight;
-
-        batch.draw(levelButton, x, y, buttonWidth, buttonHeight);
 
         player.draw(batch);
         bulletManager.drawAll(batch);
@@ -220,7 +215,6 @@ public class Stage3 implements Screen {
         background.dispose();
         bgMusic.stop();
         bgMusic.dispose();
-        levelButton.dispose();
         font.dispose();
     }
 }

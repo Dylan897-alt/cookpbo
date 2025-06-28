@@ -65,13 +65,11 @@ public class Player extends Character {
     public void addUpgrades(){
         upgrades.add(new ReduceCooldown()); // level 2
         upgrades.add(new IncreaseDamage()); // level 3
-        upgrades.add(new Heal());           // level 4
-        upgrades.add(new Heal());    // level 5
+        upgrades.add(new ReduceCooldown()); // level 2
+        upgrades.add(new IncreaseDamage());    // level 5
         upgrades.add(new SwitchWeapon());   // level 6
         upgrades.add(new ReduceCooldown()); // level 7
         upgrades.add(new IncreaseDamage()); // level 8
-        upgrades.add(new ReduceCooldown()); // level 9
-        upgrades.add(new Heal());           // level 10
     }
 
     @Override
@@ -163,6 +161,14 @@ public class Player extends Character {
         }
     }
 
+    public void heal(int value){
+        if(getHp() + value > getMaxHp()){
+            value = (int) (getMaxHp() - getHp());
+        }
+        setHp(getHp() + value);
+        System.out.println(value);
+    }
+
     public float getLevel(){
         return level;
     }
@@ -171,12 +177,12 @@ public class Player extends Character {
         level++;
         expToNextLevel = (int) Math.ceil(expToNextLevel * 2.2);
 
-        if (level <= 10 && level - 2 < upgrades.size()) {
+        if (level <= 8 && level - 2 < upgrades.size()) {
             upgrades.get(level - 2).apply(this);
             System.out.println("Level " + level + " upgrade: " + upgrades.get(level - 2).getDescription());
         } else {
-            new IncreaseDamage().apply(this);
-            System.out.println("Level " + level + ": Permanent damage increase");
+            new Heal().apply(this);
+            System.out.println("Level " + level + ": Heal 5 HP");
         }
     }
 

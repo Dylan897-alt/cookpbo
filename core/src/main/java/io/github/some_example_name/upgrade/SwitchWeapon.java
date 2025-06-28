@@ -6,7 +6,7 @@ import io.github.some_example_name.weapon.TripleShotWeapon;
 public class SwitchWeapon implements Upgrade{
     @Override
     public void apply(Player player) {
-        player.setWeapon(new TripleShotWeapon(.6f, 1.5f));
+        player.setWeapon(new TripleShotWeapon(.5f, 1.8f));
     }
 
     @Override
