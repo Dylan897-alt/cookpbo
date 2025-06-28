@@ -39,7 +39,7 @@ public class EnemyManager {
         templateStage3.add(new EnemyTemplate(.1f, 3, 50, 1, "single.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
         templateStage3.add(new EnemyTemplate(.1f, 3, 50, 2, "stage3_triple.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
         templateStage3.add(new EnemyTemplate(.1f, 3, 50, 3, "spam.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
-        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 4, "Stage3_five.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
+        templateStage3.add(new EnemyTemplate(.1f, 3, 50, 4, "Stage3_five.atlas", "0_Monster_Attack", new Texture("bullet1.png")));
         templateStage3.add(new EnemyTemplate(.1f, 3, 50, 6, "stage2_melee.atlas", "0_Monster_Fly", new Texture("bullet1.png")));
 
         templateStage4.add(new EnemyTemplate(.1f, 3, 50, 1, "stage4_single.atlas", "0_Monster_Walking", new Texture("bullet1.png")));

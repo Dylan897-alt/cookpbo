@@ -10,6 +10,7 @@ import io.github.some_example_name.Damageable;
 public abstract class Character implements Collidable, Damageable {
     protected Sprite sprite;
     private float hp;
+    private float maxHp;
     private float exp;
     private float damage;
 
@@ -24,12 +25,13 @@ public abstract class Character implements Collidable, Damageable {
     }
     @Override
     public void takeDamage(float damage){
-        hp-=damage; //!!!!!!!!tolong check
+        hp-=damage;
     }
 
     public Character(Sprite sprite, float hp, float exp) {
         this.sprite = sprite;
         this.hp = hp;
+        this.maxHp = hp;
         this.exp = exp;
         this.damage = 1;
     }
@@ -71,6 +73,10 @@ public abstract class Character implements Collidable, Damageable {
     }
     public void setExp(float value) {
         this.exp = value;
+    }
+
+    public float getMaxHp(){
+        return maxHp;
     }
 
     public float getDamage(){

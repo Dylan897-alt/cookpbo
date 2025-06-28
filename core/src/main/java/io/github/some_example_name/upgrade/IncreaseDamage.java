@@ -1,4 +1,6 @@
-package io.github.some_example_name.character;
+package io.github.some_example_name.upgrade;
+
+import io.github.some_example_name.character.Player;
 
 public class IncreaseDamage implements Upgrade {
     @Override

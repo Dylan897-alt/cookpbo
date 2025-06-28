@@ -101,8 +101,9 @@ public class Stage3 implements Screen {
         this.deathAnimation = FrameHandler.createAnimation(
             new Texture("enemy-explosion.png"), 80, 80, .1f, false
         );
+        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("gun-shot.mp3"));
 
-        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("26. TV WORLD (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
+//        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("26. TV WORLD (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
         bgMusic.play();
@@ -132,7 +133,7 @@ public class Stage3 implements Screen {
         player.update(delta);
         crosshair.update(delta);
         bulletManager.updateBullets(delta);
-        enemyManager.handleSpawnStage2(delta, isStageCleared);
+        enemyManager.handleSpawnStage3(delta, isStageCleared);
         enemyManager.updateEnemies(delta, bulletManager, player);
         collisionManager.handleAllCollisions(player, bulletManager, enemyManager);
 

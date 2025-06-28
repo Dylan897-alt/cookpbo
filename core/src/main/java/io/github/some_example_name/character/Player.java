@@ -6,14 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import io.github.some_example_name.ShooterGame;
-import io.github.some_example_name.object.Bullet;
-import io.github.some_example_name.object.BulletOwner;
+import io.github.some_example_name.upgrade.*;
 import io.github.some_example_name.utils.FrameHandler;
 import io.github.some_example_name.weapon.SingleShotWeapon;
 import io.github.some_example_name.weapon.Weapon;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -35,6 +32,7 @@ public class Player extends Character {
 
     public Player(float hp, float exp, Texture spriteSheet, Texture bulletTexture) {
         super(new Sprite(), hp, exp);
+        addUpgrades();
         float frameDuration = 0.1f;
 
         int frameCols = 8;
@@ -62,6 +60,18 @@ public class Player extends Character {
 
         this.bulletTexture = bulletTexture;
         this.weapon = new SingleShotWeapon(.8f, 1.5f);
+    }
+
+    public void addUpgrades(){
+        upgrades.add(new ReduceCooldown()); // level 2
+        upgrades.add(new IncreaseDamage()); // level 3
+        upgrades.add(new Heal());           // level 4
+        upgrades.add(new Heal());    // level 5
+        upgrades.add(new SwitchWeapon());   // level 6
+        upgrades.add(new ReduceCooldown()); // level 7
+        upgrades.add(new IncreaseDamage()); // level 8
+        upgrades.add(new ReduceCooldown()); // level 9
+        upgrades.add(new Heal());           // level 10
     }
 
     @Override
@@ -93,10 +103,18 @@ public class Player extends Character {
         }
     }
 
-    public Animation<TextureRegion> getWalkRightAnim() { return walkRightAnim; }
-    public Animation<TextureRegion> getWalkLeftAnim() { return walkLeftAnim; }
-    public Animation<TextureRegion> getWalkUpAnim() { return walkUpAnim; }
-    public Animation<TextureRegion> getWalkDownAnim() { return walkDownAnim; }
+    public Animation<TextureRegion> getWalkRightAnim() {
+        return walkRightAnim;
+    }
+    public Animation<TextureRegion> getWalkLeftAnim() {
+        return walkLeftAnim;
+    }
+    public Animation<TextureRegion> getWalkUpAnim() {
+        return walkUpAnim;
+    }
+    public Animation<TextureRegion> getWalkDownAnim() {
+        return walkDownAnim;
+    }
 
     public void resetAnimation() {
         animationTime = 0;
@@ -124,7 +142,6 @@ public class Player extends Character {
         if (canTakeDamage()) {
             super.takeDamage(damage);
             invincibilityCooldown = INVINCIBILITY_FRAME;
-            // Optional: play damage sound, flash sprite, etc.
         }
     }
 
@@ -152,11 +169,11 @@ public class Player extends Character {
 
     private void levelUp() {
         level++;
-        expToNextLevel = (int) Math.ceil(expToNextLevel * 1.5);
+        expToNextLevel = (int) Math.ceil(expToNextLevel * 2.2);
 
-        if (level <= 10 && level - 1 < upgrades.size()) {
-            upgrades.get(level - 1).apply(this);
-            System.out.println("Level " + level + " upgrade: " + upgrades.get(level - 1).getDescription());
+        if (level <= 10 && level - 2 < upgrades.size()) {
+            upgrades.get(level - 2).apply(this);
+            System.out.println("Level " + level + " upgrade: " + upgrades.get(level - 2).getDescription());
         } else {
             new IncreaseDamage().apply(this);
             System.out.println("Level " + level + ": Permanent damage increase");

@@ -1,4 +1,6 @@
-package io.github.some_example_name.character;
+package io.github.some_example_name.upgrade;
+
+import io.github.some_example_name.character.Player;
 
 public class ReduceCooldown implements Upgrade {
     @Override
@@ -10,6 +12,6 @@ public class ReduceCooldown implements Upgrade {
 
     @Override
     public String getDescription() {
-        return "Fire Rate +10%";
+        return "Weapon Cooldown -0.1 detik";
     }
 }
