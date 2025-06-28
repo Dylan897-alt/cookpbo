@@ -18,6 +18,10 @@ public class TripleShotWeapon extends Weapon {
         super(cooldown);
     }
 
+    public TripleShotWeapon(float cooldown, float speedModifier){
+        super(cooldown, speedModifier);
+    }
+
     @Override
     public void fire(Texture bulletTexture, Vector2 origin, Vector2 direction, BulletSpawner spawner, BulletOwner ownerType, Damageable ownerEntity) {
         Vector2 baseDirection = new Vector2(direction).nor();

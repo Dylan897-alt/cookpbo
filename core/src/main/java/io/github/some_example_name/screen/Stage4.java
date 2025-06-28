@@ -132,7 +132,7 @@ public class Stage4 implements Screen {
         player.update(delta);
         crosshair.update(delta);
         bulletManager.updateBullets(delta);
-        enemyManager.handleSpawnStage2(delta, isStageCleared);
+        enemyManager.handleSpawnStage4(delta, isStageCleared);
         enemyManager.updateEnemies(delta, bulletManager, player);
         collisionManager.handleAllCollisions(player, bulletManager, enemyManager);
 

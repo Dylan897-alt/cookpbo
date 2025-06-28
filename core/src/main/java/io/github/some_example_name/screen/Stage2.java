@@ -101,8 +101,8 @@ public class Stage2 implements Screen {
         this.deathAnimation = FrameHandler.createAnimation(
             new Texture("enemy-explosion.png"), 80, 80, .1f, false
         );
-
-        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("12. Physical Challenge (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
+        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("gun-shot.mp3"));
+        //this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("12. Physical Challenge (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
         bgMusic.play();

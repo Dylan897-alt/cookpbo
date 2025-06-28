@@ -101,8 +101,9 @@ public class Stage1 implements Screen {
         this.deathAnimation = FrameHandler.createAnimation(
             new Texture("enemy-explosion.png"), 80, 80, .1f, false
         );
+        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("gun-shot.mp3"));
 
-        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("08. Quiz! (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
+       // this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("08. Quiz! (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
         bgMusic.play();
@@ -167,6 +168,11 @@ public class Stage1 implements Screen {
             (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
         font.draw(batch, "LVL: " + (int)player.getLevel(),
             (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.1f * ShooterGame.SCALE));
+        font.draw(batch, "HP: " + (int)player.getHp(),
+            (0.2f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.4f * ShooterGame.SCALE));
+        font.draw(batch, "DMG: " + (int)player.getDamage(),
+            (5f * ShooterGame.SCALE), ShooterGame.VIRTUAL_HEIGHT - (0.4f * ShooterGame.SCALE));
+
         if (isStageCleared) {
             font.getData().setScale(0.02f * ShooterGame.SCALE);
 
