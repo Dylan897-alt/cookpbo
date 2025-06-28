@@ -103,7 +103,7 @@ public class Stage1 implements Screen {
         );
         this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("gun-shot.mp3"));
 
-       // this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("08. Quiz! (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
+//        this.bgMusic = Gdx.audio.newMusic(Gdx.files.internal("08. Quiz! (DELTARUNE Chapter 3+4 Soundtrack) - Toby Fox.mp3"));
         bgMusic.setLooping(false);
         bgMusic.setVolume(0.5f);
         bgMusic.play();
